@@ -1,0 +1,78 @@
+/* =====================================================
+   GLOBAL STYLES
+===================================================== */
+
+/* Variables */
+
+:root {
+    --background: #050B10;
+    --surface: #09141D;
+    --border: #123042;
+
+    --primary: #29A9E1;
+    --primary-hover: #3BB8F0;
+
+    --text: #F5F7FA;
+    --secondary: #8FA5B8;
+
+    --radius: 22px;
+    --transition: .3s ease;
+}
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--background);
+    color:var(--text);
+    font-family:'Montserrat',sans-serif;
+    overflow-x:hidden;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+}
+
+ul{
+    list-style:none;
+}
+
+img{
+    width:100%;
+    display:block;
+}
+
+section{
+    padding:100px 0;
+}
+
+/* Global Buttons */
+
+.btn-primary-custom{
+
+    background:var(--primary);
+    color:#050B10;
+    border:none;
+    border-radius:999px;
+    padding:14px 34px;
+    transition:.3s;
+
+}
+
+.btn-outline-custom{
+
+    border:1px solid var(--primary);
+    color:var(--primary);
+    border-radius:999px;
+    padding:14px 34px;
+}

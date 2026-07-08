@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home | Line Eight
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/hero.css' %}">
+<link rel="stylesheet" href="{% static 'css/clients.css' %}">
+<link rel="stylesheet" href="{% static 'css/home-services.css' %}">
+<link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+<link rel="stylesheet" href="{% static 'css/why.css' %}">
+<link rel="stylesheet" href="{% static 'css/cta.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- Hero -->
+    {% include 'includes/hero.html' %}
+
+    <!-- Trusted Brands -->
+    {% include 'includes/clients.html' %}
+
+    <!-- Services Preview -->
+    {% include 'includes/services.html' %}
+
+    <!-- Featured Projects -->
+    {% include 'includes/portfolio.html' %}
+
+    <!-- Why Choose Us -->
+    {% include 'includes/why.html' %}
+
+    <!-- Call To Action -->
+    {% include 'includes/cta.html' %}
+
+{% endblock %}

@@ -1,0 +1,87 @@
+/* ===============================
+   CTA SECTION
+================================== */
+
+.cta-section{
+
+    padding:100px 0;
+
+}
+
+.cta-box{
+
+    background:linear-gradient(
+    135deg,
+    rgba(41,169,225,.08),
+    rgba(9,20,29,1)
+    );
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
+    padding:80px 40px;
+
+    text-align:center;
+
+}
+
+.cta-box h2{
+
+    font-size:3rem;
+
+    margin:20px 0;
+
+    font-weight:700;
+
+}
+
+.cta-box p{
+
+    color:var(--secondary);
+
+    margin-bottom:40px;
+
+    font-size:1.1rem;
+
+}
+
+.cta-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+/* Outline Button */
+
+.btn-outline-custom{
+
+    border:1px solid var(--primary);
+
+    color:var(--text);
+
+    padding:14px 34px;
+
+    border-radius:999px;
+
+    text-decoration:none;
+
+    transition:.35s;
+
+    font-weight:600;
+
+}
+
+.btn-outline-custom:hover{
+
+    background:var(--primary);
+
+    color:#050B10;
+
+}

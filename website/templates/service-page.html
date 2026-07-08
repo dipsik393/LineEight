@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Services{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/service-page.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% include 'includes/service_hero.html' %}
+{% include 'includes/service_cards.html' %}
+{% include 'includes/services_process.html' %}
+
+
+{% endblock %}

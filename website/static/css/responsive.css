@@ -1,0 +1,430 @@
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width:991px){
+
+    .navbar-collapse{
+
+        background:#09141D;
+        padding:25px;
+        border-radius:18px;
+        margin-top:20px;
+
+    }
+
+    .nav-item{
+
+        margin:10px 0;
+
+    }
+
+    .start-btn{
+
+        width:100%;
+        margin-top:20px;
+
+    }
+
+}
+/* HERO */
+
+@media(max-width:991px){
+
+.hero{
+
+padding-top:120px;
+
+}
+
+.hero-content{
+
+padding-right:0;
+
+text-align:center;
+
+margin-bottom:60px;
+
+}
+
+.hero-title{
+
+font-size:3rem;
+
+}
+
+.hero-buttons{
+
+justify-content:center;
+
+}
+
+.hero-image{
+
+height:450px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.hero-title{
+
+font-size:2.5rem;
+
+}
+
+.hero-image{
+
+height:320px;
+
+}
+
+}
+
+/* CLIENTS */
+
+@media(max-width:768px){
+
+.clients-header h2{
+
+font-size:2rem;
+
+}
+
+.client-card{
+
+height:120px;
+
+}
+
+.client-card img{
+
+width:100px;
+
+}
+
+}
+
+/* SERVICES */
+
+.services {
+
+padding: 70px 0;
+
+}
+
+.services-heading {
+
+text-align: center;
+
+max-width: 720px;
+
+margin: auto;
+
+margin-bottom: 50px;
+
+}
+
+.service-card {
+
+background: var(--surface);
+
+border: 1px solid var(--border);
+
+border-radius: 22px;
+
+overflow: hidden;
+
+transition: .35s;
+
+height: 100%;
+
+}
+
+.service-card img {
+
+width: 100%;
+
+height: 190px;
+
+object-fit: cover;
+
+transition: .4s;
+
+}
+
+.service-card:hover {
+
+transform: translateY(-6px);
+
+border-color: var(--primary);
+
+}
+
+.service-card:hover img {
+
+transform: scale(1.03);
+
+}
+
+.service-content {
+
+padding: 24px;
+
+}
+
+.service-content h3 {
+
+font-size: 1.35rem;
+
+margin-bottom: 12px;
+
+}
+
+.service-content p {
+
+color: var(--secondary);
+
+margin-bottom: 20px;
+
+}
+
+.service-content a {
+
+color: var(--primary);
+
+font-weight: 600;
+
+}
+
+/* FEATURED PROJECTS */
+
+@media(max-width:991px){
+
+    .project-card img{
+
+        height:220px;
+
+    }
+
+    .view-all-card{
+
+        min-height:220px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .project-card img{
+
+        height:180px;
+
+    }
+
+}
+
+/* CTA */
+
+@media(max-width:768px){
+
+.cta-box{
+
+padding:60px 25px;
+
+}
+
+.cta-box h2{
+
+font-size:2rem;
+
+}
+
+}
+
+/* FOOTER */
+
+@media(max-width:768px){
+
+.footer{
+
+text-align:center;
+
+}
+
+.footer-social{
+
+justify-content:center;
+
+margin-bottom:30px;
+
+}
+
+.footer-bottom{
+
+flex-direction:column;
+
+}
+
+.footer-bottom div{
+
+justify-content:center;
+
+}
+
+}
+
+/* SERVICES PAGE */
+
+@media(max-width:991px){
+
+.service-hero{
+
+text-align:center;
+
+}
+
+.hero-collage{
+
+margin-top:50px;
+
+}
+
+.service-hero h1{
+
+font-size:2.7rem;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.hero-collage{
+
+grid-template-columns:1fr;
+
+}
+
+.item1,
+.item2,
+.item3,
+.item4{
+
+height:220px;
+
+}
+
+}
+@media(max-width:992px){
+
+.service-card{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+.service-card.reverse{
+
+direction:ltr;
+
+}
+
+.service-content p{
+
+max-width:100%;
+
+}
+
+}
+
+/*=========================================
+BLOG PAGE
+=========================================*/
+
+@media (max-width:992px){
+
+    .blog-hero h1{
+
+        font-size:3rem;
+
+    }
+
+    .blog-heading h2{
+
+        font-size:2.5rem;
+
+    }
+
+    .newsletter h2{
+
+        font-size:2.4rem;
+
+    }
+
+    .newsletter-box{
+
+        padding:50px 35px;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .blog-card img{
+
+        height:200px;
+
+    }
+
+    .newsletter-form{
+
+        flex-direction:column;
+
+    }
+
+    .newsletter-form input,
+
+    .newsletter-form button{
+
+        width:100%;
+
+        max-width:100%;
+
+    }
+
+}
+
+@media (max-width:576px){
+
+    .blog-hero{
+
+        padding:100px 0 60px;
+
+    }
+
+    .blog-hero h1{
+
+        font-size:2.3rem;
+
+    }
+
+    .blog-heading h2{
+
+        font-size:2rem;
+
+    }
+
+    .newsletter h2{
+
+        font-size:2rem;
+
+    }
+
+}
