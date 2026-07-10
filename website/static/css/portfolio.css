@@ -1,96 +1,212 @@
-/* =====================================
-   FEATURED PROJECTS
-===================================== */
+/*=========================================
+PORTFOLIO
+=========================================*/
 
-.featured-projects{
+.portfolio{
 
-    padding:80px 0;
-
-}
-
-.section-header{
-
-    margin-bottom:35px;
+    padding:110px 0;
 
 }
 
-.section-header h2{
+.portfolio-header{
 
-    font-size:2rem;
+    text-align:center;
+
+    margin-bottom:60px;
+
+}
+
+.portfolio-header h2{
+
+    font-size:3rem;
+
+    color:var(--text);
 
     font-weight:700;
 
+    margin-top:20px;
+
 }
+
+/*=========================================
+GRID
+=========================================*/
+
+.portfolio-wrapper{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:24px;
+
+    align-items:stretch;
+
+}
+
+/*=========================================
+PROJECT CARD
+=========================================*/
 
 .project-card{
 
-    display:block;
+    display:flex;
+
+    flex-direction:column;
 
     background:var(--surface);
 
     border:1px solid var(--border);
 
-    border-radius:18px;
+    border-radius:24px;
 
     overflow:hidden;
 
+    text-decoration:none;
+
     transition:.35s;
 
-    text-decoration:none;
+    position:relative;
 
 }
 
 .project-card:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-8px);
 
     border-color:var(--primary);
 
+    box-shadow:0 20px 40px rgba(41,169,225,.12);
+
 }
 
-.project-card img{
+/*=========================================
+IMAGE
+=========================================*/
+
+.project-image{
+
+    position:relative;
+
+    height:260px;
+
+    overflow:hidden;
+
+}
+
+.project-image img{
 
     width:100%;
 
-    height:170px;
+    height:100%;
 
     object-fit:cover;
 
-    transition:.4s;
+    transition:.5s;
 
 }
 
-.project-card:hover img{
+.project-card:hover .project-image img{
 
-    transform:scale(1.05);
-
-}
-
-.project-content{
-
-    padding:18px;
+    transform:scale(1.06);
 
 }
 
-.project-content h5{
+/*=========================================
+OVERLAY
+=========================================*/
 
-    color:var(--text);
+.project-overlay{
 
-    font-size:1rem;
+    position:absolute;
 
-    margin:0;
+    inset:0;
+
+    background:rgba(8,19,27,.65);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.project-card:hover .project-overlay{
+
+    opacity:1;
+
+}
+
+.project-overlay span{
+
+    background:var(--primary);
+
+    color:#08131B;
+
+    padding:12px 20px;
+
+    border-radius:999px;
 
     font-weight:600;
 
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
 }
 
-.view-all-card{
+/*=========================================
+TEXT
+=========================================*/
 
-    background:var(--surface);
+.project-info{
 
-    border:1px solid var(--border);
+    padding:24px;
 
-    border-radius:18px;
+}
+
+.project-info small{
+
+    display:block;
+
+    color:var(--primary);
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+
+}
+
+.project-info h3{
+
+    color:var(--text);
+
+    font-size:1.1rem;
+
+    line-height:1.5;
+
+    margin:0;
+
+}
+
+/*=========================================
+VIEW MORE
+=========================================*/
+
+.more-projects{
 
     display:flex;
 
@@ -100,61 +216,59 @@
 
     align-items:center;
 
-    height:100%;
+    text-align:center;
 
-    min-height:235px;
+    min-height:365px;
 
-    text-decoration:none;
-
-    transition:.35s;
-
-    padding:20px;
+    gap:25px;
 
 }
 
-.view-all-card:hover{
+.more-icon{
 
-    border-color:var(--primary);
+    width:90px;
 
-    transform:translateY(-6px);
-
-}
-
-.view-all-card div{
-
-    width:80px;
-
-    height:80px;
+    height:90px;
 
     border-radius:50%;
 
-    background:linear-gradient(135deg,#29A9E1,#4F46E5);
+    background:rgba(41,169,225,.10);
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    margin-bottom:20px;
+    align-items:center;
+
+    transition:.35s;
 
 }
 
-.view-all-card i{
+.more-icon i{
 
-    color:white;
+    color:var(--primary);
 
-    font-size:2.3rem;
+    font-size:2.4rem;
 
 }
 
-.view-all-card p{
+.more-projects:hover .more-icon{
 
-    color:white;
+    background:var(--primary);
 
-    text-align:center;
+}
 
-    font-weight:600;
+.more-projects:hover .more-icon i{
+
+    color:#08131B;
+
+}
+
+.more-projects h3{
+
+    color:var(--text);
+
+    font-size:1.2rem;
 
     margin:0;
 
