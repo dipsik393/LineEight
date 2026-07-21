@@ -1,0 +1,80 @@
+{% load static %}
+
+<section class="related-projects">
+
+    <div class="container">
+
+        <div class="gallery-heading">
+
+            <span class="section-tag">
+
+                MORE PROJECTS
+
+            </span>
+
+            <h2>
+
+                Explore More Work
+
+            </h2>
+
+            <p>
+
+                Browse more healthcare websites designed and developed by Line Eight.
+
+            </p>
+
+        </div>
+
+        <div class="related-grid">
+
+            <!-- PASE -->
+
+            <a href="{% url 'pase' %}" class="related-card">
+
+                <img src="{% static 'images/projects/pase/home.jpg' %}"
+                     alt="PASE">
+
+                <h4>
+
+                    Pan African Society of Endometriosis
+
+                </h4>
+
+            </a>
+
+            <!-- Astron -->
+
+            <a href="{% url 'astron' %}" class="related-card">
+
+                <img src="{% static 'images/projects/astron/home.jpg' %}"
+                     alt="Astron">
+
+                <h4>
+
+                    Astron Healthcare
+
+                </h4>
+
+            </a>
+
+            <!-- Quest -->
+
+            <a href="{% url 'quest' %}" class="related-card">
+
+                <img src="{% static 'images/projects/quest/home.jpg' %}"
+                     alt="Quest Labs">
+
+                <h4>
+
+                    Quest Labs
+
+                </h4>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

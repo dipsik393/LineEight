@@ -1,0 +1,81 @@
+{% load static %}
+
+<section class="related-projects">
+
+    <div class="container">
+
+        <div class="gallery-heading">
+
+            <span class="section-tag">
+
+                MORE PROJECTS
+
+            </span>
+
+            <h2>
+
+                Explore More Work
+
+            </h2>
+
+            <p>
+
+                Discover more websites designed and developed by Line Eight
+                across healthcare and digital innovation.
+
+            </p>
+
+        </div>
+
+        <div class="related-grid">
+
+            <!-- Astron -->
+
+            <a href="{% url 'astron' %}" class="related-card">
+
+                <img src="{% static 'images/projects/astron/home.jpg' %}"
+                     alt="Astron Healthcare">
+
+                <h4>
+
+                    Astron Healthcare
+
+                </h4>
+
+            </a>
+
+            <!-- Quest Labs -->
+
+            <a href="{% url 'quest' %}" class="related-card">
+
+                <img src="{% static 'images/projects/quest/home.jpg' %}"
+                     alt="Quest Labs">
+
+                <h4>
+
+                    Quest Labs
+
+                </h4>
+
+            </a>
+
+            <!-- Healing Mama Africa -->
+
+            <a href="{% url 'healing_mama_africa' %}" class="related-card">
+
+                <img src="{% static 'images/projects/healing/home.jpg' %}"
+                     alt="Healing Mama Africa">
+
+                <h4>
+
+                    Healing Mama Africa
+
+                </h4>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

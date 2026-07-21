@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+
+Pan African Society | Line EIGHT
+
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/project_detail.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/project_hero.html" %}
+
+{% include "includes/project_overview.html" %}
+
+{% include "includes/project_gallery.html" %}
+
+{% include "includes/project_process.html" %}
+
+{% include "includes/project_navigation.html" %}
+
+{% include "includes/project_cta.html" %}
+
+{% include "includes/related_projects.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{% static 'js/project_detail.js' %}"></script>
+{% endblock %}
+
+<!-- ==========================
+PROJECT LIGHTBOX
+========================== -->
+
+<div class="gallery-lightbox" id="galleryLightbox">
+
+    <span class="close-lightbox">&times;</span>
+
+    <img id="lightboxImage" src="" alt="Project Preview">
+
+    <button class="lightbox-prev">
+        <i class="bi bi-chevron-left"></i>
+    </button>
+
+    <button class="lightbox-next">
+        <i class="bi bi-chevron-right"></i>
+    </button>
+
+</div>

@@ -1,0 +1,81 @@
+{% load static %}
+
+<section class="related-projects">
+
+    <div class="container">
+
+        <div class="related-heading">
+
+            <span class="section-tag">
+
+                MORE PROJECTS
+
+            </span>
+
+            <h2>
+
+                Explore More Work
+
+            </h2>
+
+            <p>
+
+                Discover more digital experiences designed and
+                developed by Line Eight.
+
+            </p>
+
+        </div>
+
+        <div class="related-grid">
+
+            <!-- PASE -->
+
+            <a href="{% url 'pase' %}" class="related-card">
+
+                <img src="{% static 'images/projects/pase/npase.jpg' %}"
+                     alt="PASE Africa">
+
+                <h4>
+
+                    Pan African Society of Endometriosis
+
+                </h4>
+
+            </a>
+
+            <!-- HPB -->
+
+            <a href="{% url 'hbp' %}" class="related-card">
+
+                <img src="{% static 'images/projects/hbp/home.jpg' %}"
+                     alt="HPB Surgeon">
+
+                <h4>
+
+                    HPB Surgeon Kenya
+
+                </h4>
+
+            </a>
+
+            <!-- Healing Mama Africa -->
+
+            <a href="{% url 'healing_mama_africa' %}" class="related-card">
+
+                <img src="{% static 'images/projects/healing/home.jpg' %}"
+                     alt="Healing Mama Africa">
+
+                <h4>
+
+                    Healing Mama Africa
+
+                </h4>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

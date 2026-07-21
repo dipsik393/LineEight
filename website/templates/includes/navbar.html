@@ -1,47 +1,102 @@
+{% load static %}
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
 
     <div class="container">
 
         <!-- Logo -->
-        <a class="navbar-brand fw-bold" href="/">
+
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+
             <span class="logo-icon"></span>
+
             Line <span class="text-info">Eight</span>
+
         </a>
 
         <!-- Mobile Toggle -->
+
         <button class="navbar-toggler border-0 shadow-none"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarMenu">
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
             <i class="bi bi-list fs-2"></i>
 
         </button>
+
+        <!-- Navigation -->
 
         <div class="collapse navbar-collapse" id="navbarMenu">
 
             <ul class="navbar-nav mx-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">Home</a>
+
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                       href="{% url 'home' %}">
+
+                        Home
+
+                    </a>
+
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/services/">Services</a>
+
+                    <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}"
+                       href="{% url 'services' %}">
+
+                        Services
+
+                    </a>
+
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/blog/">Blog</a>
+
+                    <a class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}"
+                       href="{% url 'projects' %}">
+
+                        Projects
+
+                    </a>
+
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact/">Contact</a>
+
+                    <a class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}"
+                       href="{% url 'blog' %}">
+
+                        Blog
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                       href="{% url 'contact' %}">
+
+                        Contact
+
+                    </a>
+
                 </li>
 
             </ul>
 
-            <a href="/contact/" class="btn btn-primary start-btn">
+            <!-- CTA Button -->
+
+            <a href="{% url 'contact' %}" class="btn btn-primary start-btn">
+
                 Start Project
+
             </a>
 
         </div>

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Projects | Line Eight{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'includes/projects_hero.html' %}
+
+{% include 'includes/projects_filters.html' %}
+
+{% include 'includes/projects_gallery.html' %}
+
+{% include 'includes/projects_cta.html' %}
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{% static 'js/projects.js' %}"></script>
+
+{% endblock %}
