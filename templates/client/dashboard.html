@@ -1,0 +1,362 @@
+{% extends "client/client_base.html" %}
+{% load static %}
+
+{% block title %}
+Client Dashboard
+{% endblock %}
+
+{% block content %}
+
+<section class="client-dashboard">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <span class="section-tag">
+                CLIENT PORTAL
+            </span>
+
+            <h1>
+                Welcome,
+                {{ client.user.first_name|default:client.company }}
+            </h1>
+
+            <p>
+                Here's an overview of your projects and activity
+                with Line Eight.
+            </p>
+
+        </div>
+
+    </div>
+   
+
+
+    <!-- STATISTICS -->
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+
+            <i class="bi bi-folder2-open"></i>
+
+            <h3>
+                {{ project_count }}
+            </h3>
+
+            <p>
+                Projects
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <i class="bi bi-chat-dots"></i>
+
+            <h3>
+                {{ message_count }}
+            </h3>
+
+            <p>
+                Messages
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <i class="bi bi-receipt"></i>
+
+            <h3>
+                {{ invoice_count }}
+            </h3>
+
+            <p>
+                Invoices
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <i class="bi bi-calendar-event"></i>
+
+            <h3>
+                {{ meeting_count }}
+            </h3>
+
+            <p>
+                Meetings
+            </p>
+
+        </div>
+
+    </div>
+     <!-- AI ASSISTANT -->
+
+    <a href="{% url 'client_ai' %}" class="client-dashboard-ai-card">
+
+        <div class="client-dashboard-ai-icon">
+          <i class="bi bi-stars"></i>
+        </div>
+
+        <div class="client-dashboard-ai-content">
+
+            <h3>
+             Ask Line Eight AI
+            </h3>
+
+            <p>
+              Get quick answers about your projects,
+              files, updates and messages.
+            </p>
+
+        </div>
+
+        <div class="client-dashboard-ai-arrow">
+            <i class="bi bi-arrow-right"></i>
+        </div>
+
+    </a>
+
+    <!-- PROJECTS -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    My Projects
+                </h2>
+
+                <p>
+                    Projects currently assigned to
+                    {{ client.company }}.
+                </p>
+
+            </div>
+
+            <span class="project-count">
+                {{ project_count }}
+            </span>
+
+        </div>
+
+
+        {% if projects %}
+
+            <div class="project-list">
+
+                {% for project in projects %}
+
+                    <div class="project-item">
+
+                        <div class="project-info">
+
+                            {% if project.hero_image %}
+
+                                <img
+                                    src="{{ project.hero_image.url }}"
+                                    alt="{{ project.title }}"
+                                    class="project-image">
+
+                            {% endif %}
+
+
+                            <div>
+
+                                <h4>
+                                    {{ project.title }}
+                                </h4>
+
+                                <small>
+
+                                    {% if project.service %}
+                                        {{ project.service }}
+                                    {% endif %}
+
+                                    {% if project.industry %}
+                                        • {{ project.industry }}
+                                    {% endif %}
+
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="project-actions">
+
+                            <span class="status-badge">
+
+                                {{ project.get_status_display }}
+
+                            </span>
+
+                            <a href="{% url 'client_project_detail' project.pk %}"
+                               class="project-view">
+
+                                View Project
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <i class="bi bi-folder-x"></i>
+
+                <h3>
+                    No projects yet
+                </h3>
+
+                <p>
+                    Your projects will appear here once
+                    Line Eight assigns them to your account.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- LOWER DASHBOARD -->
+
+    <div class="dashboard-grid">
+
+
+        <!-- FILES -->
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <h2>
+                    Recent Files
+                </h2>
+
+                <i class="bi bi-file-earmark"></i>
+
+            </div>
+
+            <div class="empty-state small">
+
+                <i class="bi bi-cloud-arrow-down"></i>
+
+                <p>
+                    Project files will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGES -->
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <h2>
+                    Messages
+                </h2>
+
+                <i class="bi bi-chat-dots"></i>
+
+            </div>
+
+            <div class="empty-state small">
+
+                <i class="bi bi-chat-left-text"></i>
+
+                <p>
+                    Your conversations with Line Eight
+                    will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- INVOICES -->
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <h2>
+                    Invoices
+                </h2>
+
+                <i class="bi bi-receipt"></i>
+
+            </div>
+
+            <div class="empty-state small">
+
+                <i class="bi bi-file-earmark-text"></i>
+
+                <p>
+                    Your invoices will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MEETINGS -->
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <h2>
+                    Upcoming Meetings
+                </h2>
+
+                <i class="bi bi-calendar-event"></i>
+
+            </div>
+
+            <div class="empty-state small">
+
+                <i class="bi bi-calendar"></i>
+
+                <p>
+                    No upcoming meetings.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

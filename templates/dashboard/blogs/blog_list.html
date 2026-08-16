@@ -1,0 +1,234 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Blog Articles
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Blog Articles
+        </h1>
+
+        <p>
+            Create, edit and manage your blog content.
+        </p>
+
+    </div>
+
+    <a href="{% url 'dashboard_blog_create' %}" class="primary-btn">
+        New Article
+    </a>
+
+</div>
+
+
+<!-- SEARCH & FILTER -->
+
+<form method="GET" class="dashboard-search">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search articles..."
+        value="{{ search }}">
+
+    <select name="status">
+
+        <option value="">All Status</option>
+
+        <option
+            value="published"
+            {% if status == "published" %}selected{% endif %}>
+            Published
+        </option>
+
+        <option
+            value="draft"
+            {% if status == "draft" %}selected{% endif %}>
+            Draft
+        </option>
+
+    </select>
+
+    <button
+        type="submit"
+        class="primary-btn">
+
+        Filter
+
+    </button>
+
+</form>
+
+
+<table class="dashboard-table">
+
+    <thead>
+
+        <tr>
+
+            <th>Image</th>
+
+            <th>Article</th>
+
+            <th>Category</th>
+
+            <th>Reading</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
+            <th>Featured</th>
+
+            <th>Actions</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for blog in blogs %}
+
+        <tr>
+
+            <td>
+
+                {% if blog.featured_image %}
+
+                <img
+                    src="{{ blog.featured_image.url }}"
+                    alt="{{ blog.title }}"
+                    width="90">
+
+                {% else %}
+
+                —
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                <strong>
+
+                    {{ blog.title }}
+
+                </strong>
+
+                <br>
+
+                <small>
+
+                    {{ blog.author }}
+
+                </small>
+
+            </td>
+
+            <td>
+
+                {{ blog.category|default:"Uncategorized" }}
+
+            </td>
+
+            <td>
+
+                {{ blog.reading_time }} min
+
+            </td>
+
+            <td>
+
+                {{ blog.created_at|date:"d M Y" }}
+
+            </td>
+
+            <td>
+
+                {% if blog.status == "published" %}
+
+                    <span class="badge success">
+
+                        Published
+
+                    </span>
+
+                {% else %}
+
+                    <span class="badge warning">
+
+                        Draft
+
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if blog.featured %}
+
+                    <span class="badge info">
+
+                        Featured
+
+                    </span>
+
+                {% else %}
+
+                    —
+
+                {% endif %}
+
+            </td>
+
+            <td class="project-actions">
+
+                <a
+                    href="{% url 'dashboard_blog_edit' blog.id %}"
+                    class="secondary-btn">
+
+                    Edit
+
+                </a>
+
+                <a
+                    href="{% url 'dashboard_blog_delete' blog.id %}"
+                    class="danger-btn">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="8" style="text-align:center; padding:40px;">
+
+                No blog articles found.
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,712 @@
+{% extends "client/client_base.html" %}
+{% load static %}
+
+{% block title %}
+{{ project.title }} | Client Portal
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/client-project.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="client-project-page">
+
+    <div class="container">
+
+
+        <!-- =========================================
+             PROJECT HEADER
+        ========================================== -->
+
+        <div class="project-page-header">
+
+            <a
+                href="{% url 'client_dashboard' %}"
+                class="back-link">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+
+            <span class="section-tag">
+                CLIENT PROJECT
+            </span>
+
+
+            <h1>
+                {{ project.title }}
+            </h1>
+
+
+            {% if project.short_description %}
+
+                <p>
+                    {{ project.short_description }}
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- =========================================
+             HERO IMAGE
+        ========================================== -->
+
+        {% if project.hero_image %}
+
+            <div class="client-project-hero">
+
+                <img
+                    src="{{ project.hero_image.url }}"
+                    alt="{{ project.title }}"
+                >
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- =========================================
+             PROJECT INFORMATION
+        ========================================== -->
+
+        <div class="project-information">
+
+
+            {% if project.client %}
+
+                <div class="project-info-card">
+
+                    <span>
+                        Client
+                    </span>
+
+                    <strong>
+                        {{ project.client.company }}
+                    </strong>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if project.service %}
+
+                <div class="project-info-card">
+
+                    <span>
+                        Service
+                    </span>
+
+                    <strong>
+                        {{ project.service }}
+                    </strong>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if project.industry %}
+
+                <div class="project-info-card">
+
+                    <span>
+                        Industry
+                    </span>
+
+                    <strong>
+                        {{ project.industry }}
+                    </strong>
+
+                </div>
+
+            {% endif %}
+
+
+            {% if project.duration %}
+
+                <div class="project-info-card">
+
+                    <span>
+                        Duration
+                    </span>
+
+                    <strong>
+                        {{ project.duration }}
+                    </strong>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- =========================================
+             PROJECT STATUS
+        ========================================== -->
+
+        <div class="client-project-section">
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    STATUS
+                </span>
+
+                <h2>
+                    Project Status
+                </h2>
+
+            </div>
+
+
+            <div class="project-status">
+
+                <span class="status-dot"></span>
+
+                {% if project.status == "published" %}
+
+                    Active
+
+                {% else %}
+
+                    {{ project.status|title }}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             PROJECT OVERVIEW
+        ========================================== -->
+
+        {% if project.overview %}
+
+            <div class="client-project-section">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        OVERVIEW
+                    </span>
+
+                    <h2>
+                        Project Overview
+                    </h2>
+
+                </div>
+
+
+                <div class="project-text">
+
+                    {{ project.overview|linebreaks }}
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- =========================================
+             CHALLENGE
+        ========================================== -->
+
+        {% if project.challenge %}
+
+            <div class="client-project-section">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        CHALLENGE
+                    </span>
+
+                    <h2>
+                        The Challenge
+                    </h2>
+
+                </div>
+
+
+                <div class="project-text">
+
+                    {{ project.challenge|linebreaks }}
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- =========================================
+             SOLUTION
+        ========================================== -->
+
+        {% if project.solution %}
+
+            <div class="client-project-section">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SOLUTION
+                    </span>
+
+                    <h2>
+                        Our Solution
+                    </h2>
+
+                </div>
+
+
+                <div class="project-text">
+
+                    {{ project.solution|linebreaks }}
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- =========================================
+             RESULTS
+        ========================================== -->
+
+        {% if project.results %}
+
+            <div class="client-project-section">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RESULTS
+                    </span>
+
+                    <h2>
+                        Project Results
+                    </h2>
+
+                </div>
+
+
+                <div class="project-text">
+
+                    {{ project.results|linebreaks }}
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- =========================================
+             PROJECT UPDATES
+        ========================================== -->
+
+        <div class="client-project-section">
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    PROGRESS
+                </span>
+
+                <h2>
+                    Project Updates
+                </h2>
+
+                <p>
+                    Follow the latest progress on your project.
+                </p>
+
+            </div>
+
+
+            {% if updates %}
+
+                <div class="project-timeline">
+
+                    {% for update in updates %}
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-marker">
+
+                                <i class="bi bi-check-lg"></i>
+
+                            </div>
+
+
+                            <div class="timeline-content">
+
+                                <div class="timeline-date">
+
+                                    {{ update.created_at|date:"M d, Y" }}
+
+                                </div>
+
+
+                                {% if update.status %}
+
+                                    <span class="timeline-status">
+
+                                        {{ update.status }}
+
+                                    </span>
+
+                                {% endif %}
+
+
+                                <h3>
+
+                                    {{ update.title }}
+
+                                </h3>
+
+
+                                {% if update.description %}
+
+                                    <p>
+
+                                        {{ update.description }}
+
+                                    </p>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <i class="bi bi-clock-history"></i>
+
+                    <h3>
+                        No updates yet
+                    </h3>
+
+                    <p>
+                        Project updates will appear here as work progresses.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- =========================================
+             PROJECT FILES
+        ========================================== -->
+
+        <div class="client-project-section">
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    FILES
+                </span>
+
+                <h2>
+                    Project Files
+                </h2>
+
+                <p>
+                    Access files and deliverables shared by the Line Eight team.
+                </p>
+
+            </div>
+
+
+            {% if files %}
+
+                <div class="client-files">
+
+                    {% for file in files %}
+
+                        <div class="client-file">
+
+
+                            <!-- FILE ICON -->
+
+                            <div class="file-icon">
+
+                                {% if ".pdf" in file.file.name|lower %}
+
+                                    <i class="bi bi-file-earmark-pdf"></i>
+
+                                {% elif ".zip" in file.file.name|lower %}
+
+                                    <i class="bi bi-file-earmark-zip"></i>
+
+                                {% elif ".jpg" in file.file.name|lower or ".jpeg" in file.file.name|lower or ".png" in file.file.name|lower %}
+
+                                    <i class="bi bi-file-earmark-image"></i>
+
+                                {% elif ".doc" in file.file.name|lower %}
+
+                                    <i class="bi bi-file-earmark-word"></i>
+
+                                {% elif ".xls" in file.file.name|lower %}
+
+                                    <i class="bi bi-file-earmark-excel"></i>
+
+                                {% else %}
+
+                                    <i class="bi bi-file-earmark"></i>
+
+                                {% endif %}
+
+                            </div>
+
+
+
+                            <!-- FILE INFORMATION -->
+
+                            <div class="file-info">
+
+                                <h3>
+                                    {{ file.name }}
+                                </h3>
+
+
+                                {% if file.description %}
+
+                                    <p>
+                                        {{ file.description }}
+                                    </p>
+
+                                {% endif %}
+
+
+                                <small>
+
+                                    Uploaded
+                                    {{ file.created_at|date:"M d, Y" }}
+
+                                </small>
+
+                            </div>
+
+
+
+                            <!-- DOWNLOAD -->
+
+                            <a
+                                href="{{ file.file.url }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="primary-btn">
+
+                                <i class="bi bi-download"></i>
+
+                                Download
+
+                            </a>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <i class="bi bi-folder2-open"></i>
+
+                    <h3>
+                        No files available
+                    </h3>
+
+                    <p>
+                        Files and deliverables shared with you will appear here.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- =========================================
+             PROJECT MESSAGES
+        ========================================== -->
+
+        <div class="client-project-section">
+
+            <div class="section-heading">
+
+                <span class="section-tag">
+                    COMMUNICATION
+                </span>
+
+                <h2>
+                    Project Messages
+                </h2>
+
+                <p>
+                    Have a question or need to discuss something about your project?
+                </p>
+
+            </div>
+
+
+            <div class="project-action-card">
+
+                <div class="project-action-content">
+
+                    <div class="project-action-icon">
+
+                        <i class="bi bi-chat-dots"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Message Line Eight
+                        </h3>
+
+                        <p>
+                            Start or continue your conversation with our team.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="{% url 'client_messages' project.id %}"
+                    class="primary-btn">
+
+                    <i class="bi bi-chat"></i>
+
+                    Open Messages
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             LIVE WEBSITE
+        ========================================== -->
+
+        {% if project.website_url %}
+
+            <div class="client-project-section">
+
+                <div class="project-website">
+
+                    <div>
+
+                        <span class="section-tag">
+                            LIVE PROJECT
+                        </span>
+
+                        <h2>
+                            View Project Website
+                        </h2>
+
+                        <p>
+                            Visit the live website for this project.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="{{ project.website_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="primary-btn">
+
+                        <i class="bi bi-box-arrow-up-right"></i>
+
+                        Visit Website
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- =========================================
+             BACK TO DASHBOARD
+        ========================================== -->
+
+        <div class="project-bottom-navigation">
+
+            <a
+                href="{% url 'client_dashboard' %}"
+                class="secondary-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+{% endblock %}

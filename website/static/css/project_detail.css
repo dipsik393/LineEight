@@ -492,6 +492,10 @@ PROJECT GALLERY
 
 }
 
+.project-card.hide {
+    display: none;
+}
+
 /* Responsive */
 
 @media(max-width:992px){

@@ -1,0 +1,217 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Client Messages
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Client Messages
+        </h1>
+
+        <p>
+            Manage conversations between clients and the Line Eight team.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-card">
+
+    <div class="message-dashboard-header">
+
+        <div>
+
+            <strong>
+                Client Conversations
+            </strong>
+
+            <p>
+                Project-based client communication.
+            </p>
+
+        </div>
+
+        {% if unread_count %}
+
+            <span class="badge danger">
+                {{ unread_count }} unread
+            </span>
+
+        {% endif %}
+
+    </div>
+
+
+    <table class="dashboard-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Client</th>
+
+                <th>Project</th>
+
+                <th>Last Message</th>
+
+                <th>Sender</th>
+
+                <th>Date</th>
+
+                <th>Status</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for item in messages %}
+
+            <tr>
+
+                <td>
+
+                    <strong>
+                        {{ item.client.user.get_full_name }}
+                    </strong>
+
+                    {% if item.client.company %}
+
+                        <small>
+                            {{ item.client.company }}
+                        </small>
+
+                    {% endif %}
+
+                </td>
+
+
+                <td>
+
+                    {{ item.project.title }}
+
+                </td>
+
+
+                <td>
+
+                    {{ item.message|truncatechars:70 }}
+
+                </td>
+
+
+                <td>
+
+                    {% if item.sender == item.client.user %}
+
+                        Client
+
+                    {% else %}
+
+                        Line Eight
+
+                    {% endif %}
+
+                </td>
+
+
+                <td>
+
+                    {{ item.created_at|date:"d M Y H:i" }}
+
+                </td>
+
+
+                <td>
+
+                    {% if item.is_read %}
+
+                        <span class="badge success">
+                            Read
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge danger">
+                            Unread
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <td class="project-actions">
+
+                    <a
+                        href="{% url 'dashboard_message_detail' item.id %}"
+                        class="secondary-btn"
+                    >
+
+                        <i class="bi bi-chat-dots"></i>
+
+                        Open
+
+                    </a>
+
+
+                    <form
+                        method="POST"
+                        action="{% url 'dashboard_message_delete' item.id %}"
+                        style="display:inline;"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="danger-btn"
+                            onclick="return confirm('Delete this message?');"
+                        >
+
+                            <i class="bi bi-trash"></i>
+
+                            Delete
+
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="7">
+
+                    No client messages yet.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,259 @@
+.message-detail-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 25px;
+}
+
+
+/* Client card */
+
+.message-client-card {
+    background: var(--surface, #09141D);
+    border: 1px solid var(--border, #123042);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    height: fit-content;
+}
+
+.client-avatar {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(41, 169, 225, .1);
+    color: var(--primary, #29A9E1);
+
+    font-size: 30px;
+}
+
+.client-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.message-client-card h3 {
+    margin: 0 0 5px;
+}
+
+.client-company {
+    color: var(--secondary, #8FA5B8);
+}
+
+.client-details {
+    margin: 25px 0;
+    text-align: left;
+}
+
+.client-details div {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+
+    color: var(--secondary, #8FA5B8);
+    font-size: 13px;
+}
+
+.client-details i {
+    color: var(--primary, #29A9E1);
+}
+
+
+/* Conversation */
+
+.message-conversation {
+    background: var(--surface, #09141D);
+    border: 1px solid var(--border, #123042);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.conversation-header {
+    padding: 25px;
+    border-bottom: 1px solid var(--border, #123042);
+}
+
+.conversation-header h2 {
+    margin: 0 0 5px;
+}
+
+.conversation-header p {
+    margin: 0;
+    color: var(--secondary, #8FA5B8);
+}
+
+.conversation-list {
+    padding: 30px;
+    max-height: 550px;
+    overflow-y: auto;
+}
+
+.conversation-message {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.staff-message {
+    flex-direction: row-reverse;
+}
+
+.conversation-avatar {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(41, 169, 225, .1);
+    color: var(--primary, #29A9E1);
+}
+
+.conversation-content {
+    max-width: 75%;
+}
+
+.staff-message .conversation-content {
+    text-align: right;
+}
+
+.conversation-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.staff-message .conversation-meta {
+    justify-content: flex-end;
+}
+
+.conversation-meta strong {
+    font-size: 13px;
+}
+
+.conversation-meta span {
+    color: var(--secondary, #8FA5B8);
+    font-size: 11px;
+}
+
+.conversation-bubble {
+    padding: 13px 17px;
+    border-radius: 15px;
+
+    background: #101F2B;
+
+    line-height: 1.6;
+    text-align: left;
+}
+
+.staff-message .conversation-bubble {
+    background: var(--primary, #29A9E1);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.client-message .conversation-bubble {
+    border-bottom-left-radius: 4px;
+}
+
+
+/* Reply */
+
+.reply-box {
+    padding: 25px;
+
+    border-top: 1px solid var(--border, #123042);
+}
+
+.reply-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.reply-box textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 15px;
+
+    background: #050B10;
+    color: var(--text, #F5F7FA);
+
+    border: 1px solid var(--border, #123042);
+    border-radius: 12px;
+
+    resize: vertical;
+    font-family: inherit;
+}
+
+.reply-box textarea:focus {
+    outline: none;
+    border-color: var(--primary, #29A9E1);
+}
+
+.reply-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.reply-actions span {
+    color: var(--secondary, #8FA5B8);
+    font-size: 12px;
+}
+
+.reply-actions i {
+    color: var(--primary, #29A9E1);
+}
+
+
+/* Danger */
+
+.message-danger-zone {
+    padding: 20px 25px;
+
+    border-top: 1px solid var(--border, #123042);
+
+    text-align: right;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .message-detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .conversation-content {
+        max-width: 85%;
+    }
+
+    .reply-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .reply-actions .primary-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+}

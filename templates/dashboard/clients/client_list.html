@@ -1,0 +1,181 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+
+Clients
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            Clients
+
+        </h1>
+
+        <p>
+
+            Manage your clients.
+
+        </p>
+
+    </div>
+
+    <a href="{% url 'dashboard_client_create' %}"
+
+       class="primary-btn">
+
+        Add Client
+
+    </a>
+
+</div>
+
+<table class="dashboard-table">
+
+    <thead>
+
+        <tr>
+
+            <th>Avatar</th>
+
+            <th>Name</th>
+
+            <th>Company</th>
+
+            <th>Email</th>
+
+            <th>Phone</th>
+
+            <th>Status</th>
+
+            <th>Actions</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for client in clients %}
+
+        <tr>
+
+            <td>
+
+                {% if client.avatar %}
+
+                    <img src="{{ client.avatar.url }}"
+                         width="55"
+                         style="border-radius:50%;">
+
+                {% else %}
+
+                    <i class="bi bi-person-circle"
+                       style="font-size:2rem;"></i>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {{ client.user.get_full_name }}
+
+            </td>
+
+            <td>
+
+                {{ client.company }}
+
+            </td>
+
+            <td>
+
+                {{ client.user.email }}
+
+            </td>
+
+            <td>
+
+                {{ client.phone }}
+
+            </td>
+
+            <td>
+
+                {% if client.status == "active" %}
+
+                    <span class="badge success">
+
+                        Active
+
+                    </span>
+
+                {% else %}
+
+                    <span class="badge warning">
+
+                        Inactive
+
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td class="project-actions"> 
+
+                <a href="{% url 'dashboard_client_projects' client.id %}"
+                        class="primary-btn">
+
+                        <i class="bi bi-folder2-open"></i>
+
+                        Projects
+
+                </a>
+
+                <a href="{% url 'dashboard_client_edit' client.id %}"
+
+                   class="secondary-btn">
+
+                    Edit
+
+                </a>
+
+                <a href="{% url 'dashboard_client_delete' client.id %}"
+
+                   class="danger-btn">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="7">
+
+                No clients found.
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

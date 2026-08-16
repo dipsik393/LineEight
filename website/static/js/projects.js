@@ -1,133 +1,323 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================================
+       PROJECT FILTER + SEARCH
+    ===================================================== */
+
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const searchInput = document.getElementById("searchProjects");
+
+    // Only get cards from the main projects section
+    const projectCards = document.querySelectorAll(
+        ".projects-section .project-card"
+    );
+
+    let currentFilter = "all";
 
 
-/* ==========================================
-   SELECT ELEMENTS
-========================================== */
+    /* =====================================================
+       FILTER + SEARCH FUNCTION
+    ===================================================== */
 
-const filterButtons = document.querySelectorAll(".filter-btn");
-const projectCards = document.querySelectorAll(".project-card");
+    function filterProjects() {
 
-const searchInput = document.getElementById("searchProjects");
+        const searchValue = searchInput
+            ? searchInput.value.toLowerCase().trim()
+            : "";
 
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const closeLightbox = document.querySelector(".close-lightbox");
+        projectCards.forEach(function (card) {
 
+            const category = (
+                card.dataset.category || ""
+            )
+                .toLowerCase()
+                .trim();
 
-/* ==========================================
-   FILTER PROJECTS
-========================================== */
+            const searchText = (
+                card.dataset.search ||
+                card.textContent ||
+                ""
+            )
+                .toLowerCase();
 
-if (filterButtons.length > 0) {
+            /* FILTER */
 
-    filterButtons.forEach(button => {
+            const matchesFilter =
+                currentFilter === "all" ||
+                category === currentFilter;
 
-        button.addEventListener("click", () => {
+            /* SEARCH */
 
-            filterButtons.forEach(btn => btn.classList.remove("active"));
+            const matchesSearch =
+                searchValue === "" ||
+                searchText.includes(searchValue);
 
-            button.classList.add("active");
+            /* SHOW / HIDE */
 
-            const filter = button.dataset.filter;
+            if (matchesFilter && matchesSearch) {
 
-            projectCards.forEach(card => {
-
-                if (filter === "all" || card.classList.contains(filter)) {
-
-                    card.classList.remove("hide");
-
-                } else {
-
-                    card.classList.add("hide");
-
-                }
-
-            });
-
-        });
-
-    });
-
-}
-
-
-/* ==========================================
-   SEARCH PROJECTS
-========================================== */
-
-if (searchInput) {
-
-    searchInput.addEventListener("keyup", () => {
-
-        const value = searchInput.value.toLowerCase().trim();
-
-        projectCards.forEach(card => {
-
-            const text = card.textContent.toLowerCase();
-
-            if (text.includes(value)) {
-
-                card.classList.remove("hide");
+                card.style.display = "";
 
             } else {
 
-                card.classList.add("hide");
+                card.style.display = "none";
 
             }
 
         });
 
-    });
-
-}
+    }
 
 
-/* ==========================================
-   LIGHTBOX
-========================================== */
+    /* =====================================================
+       FILTER BUTTONS
+    ===================================================== */
 
-if (lightbox && lightboxImg && closeLightbox) {
+    filterButtons.forEach(function (button) {
 
-    document.querySelectorAll(".project-image img").forEach(image => {
+        button.addEventListener("click", function () {
 
-        image.style.cursor = "zoom-in";
+            /* Remove active state */
 
-        image.addEventListener("click", () => {
+            filterButtons.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
 
-            lightbox.classList.add("active");
+            /* Add active state */
 
-            lightboxImg.src = image.src;
+            this.classList.add("active");
 
-            lightboxImg.alt = image.alt;
+            /* Get filter */
+
+            currentFilter = (
+                this.dataset.filter || "all"
+            )
+                .toLowerCase()
+                .trim();
+
+            console.log(
+                "Selected filter:",
+                currentFilter
+            );
+
+            /* Apply filter */
+
+            filterProjects();
 
         });
 
     });
 
-    closeLightbox.addEventListener("click", () => {
 
-        lightbox.classList.remove("active");
+    /* =====================================================
+       SEARCH
+    ===================================================== */
 
-    });
+    if (searchInput) {
 
-    lightbox.addEventListener("click", (e) => {
+        searchInput.addEventListener("input", function () {
 
-        if (e.target === lightbox) {
+            filterProjects();
+
+        });
+
+    }
+
+
+    /* =====================================================
+       INITIAL FILTER
+    ===================================================== */
+
+    filterProjects();
+
+
+    /* =====================================================
+       PROJECT LIGHTBOX
+    ===================================================== */
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeLightbox = document.querySelector(".close-lightbox");
+
+    const projectImages = document.querySelectorAll(
+        ".projects-section .project-image img"
+    );
+
+
+    if (
+        lightbox &&
+        lightboxImg &&
+        closeLightbox &&
+        projectImages.length
+    ) {
+
+        projectImages.forEach(function (image) {
+
+            image.style.cursor = "zoom-in";
+
+            image.addEventListener("click", function () {
+
+                lightboxImg.src = image.src;
+                lightboxImg.alt = image.alt;
+
+                lightbox.classList.add("active");
+
+                document.body.style.overflow = "hidden";
+
+            });
+
+        });
+
+
+        /* CLOSE BUTTON */
+
+        closeLightbox.addEventListener("click", function () {
 
             lightbox.classList.remove("active");
 
+            document.body.style.overflow = "";
+
+        });
+
+
+        /* CLICK OUTSIDE IMAGE */
+
+        lightbox.addEventListener("click", function (event) {
+
+            if (event.target === lightbox) {
+
+                lightbox.classList.remove("active");
+
+                document.body.style.overflow = "";
+
+            }
+
+        });
+
+
+        /* ESCAPE KEY */
+
+        document.addEventListener("keydown", function (event) {
+
+            if (event.key === "Escape") {
+
+                lightbox.classList.remove("active");
+
+                document.body.style.overflow = "";
+
+            }
+
+        });
+
+    }
+
+
+    /* =====================================================
+       PROJECT SCROLL ANIMATIONS
+    ===================================================== */
+
+    const animatedItems = document.querySelectorAll(
+        `
+        .projects-section .project-card,
+        .project-hero,
+        .project-overview,
+        .project-gallery,
+        .project-process,
+        .project-navigation,
+        .related-projects,
+        .project-cta,
+        .overview-card,
+        .gallery-card,
+        .process-step,
+        .related-card
+        `
+    );
+
+
+    if ("IntersectionObserver" in window) {
+
+        const observer = new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("show");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+        animatedItems.forEach(function (item) {
+
+            item.classList.add("hidden");
+
+            observer.observe(item);
+
+        });
+
+    } else {
+
+        animatedItems.forEach(function (item) {
+
+            item.classList.add("show");
+
+        });
+
+    }
+
+
+    /* =====================================================
+       STAGGERED ANIMATIONS
+    ===================================================== */
+
+    document.querySelectorAll(".overview-card").forEach(
+        function (card, index) {
+
+            card.style.transitionDelay =
+                `${index * 120}ms`;
+
         }
+    );
 
-    });
 
-    document.addEventListener("keydown", (e) => {
+    document.querySelectorAll(".gallery-card").forEach(
+        function (card, index) {
 
-        if (e.key === "Escape") {
-
-            lightbox.classList.remove("active");
+            card.style.transitionDelay =
+                `${index * 100}ms`;
 
         }
+    );
 
-    });
 
-}
+    document.querySelectorAll(".process-step").forEach(
+        function (card, index) {
+
+            card.style.transitionDelay =
+                `${index * 150}ms`;
+
+        }
+    );
+
+
+    document.querySelectorAll(".related-card").forEach(
+        function (card, index) {
+
+            card.style.transitionDelay =
+                `${index * 120}ms`;
+
+        }
+    );
+
+});

@@ -1,0 +1,131 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Project Files
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <span class="section-tag">
+            PROJECT FILES
+        </span>
+
+        <h1>
+            {{ project.title }}
+        </h1>
+
+        <p>
+            Manage files available to the client.
+        </p>
+
+    </div>
+
+    <a
+        href="{% url 'project_file_create' project.id %}"
+        class="primary-btn">
+
+        <i class="bi bi-cloud-upload"></i>
+
+        Upload File
+
+    </a>
+
+</div>
+
+
+<div class="dashboard-card">
+
+    {% if files %}
+
+        <table class="dashboard-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>File</th>
+
+                    <th>Description</th>
+
+                    <th>Uploaded</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for file in files %}
+
+                <tr>
+
+                    <td>
+
+                        <i class="bi bi-file-earmark"></i>
+
+                        {{ file.name }}
+
+                    </td>
+
+                    <td>
+
+                        {{ file.description|default:"—" }}
+
+                    </td>
+
+                    <td>
+
+                        {{ file.created_at|date:"M d, Y" }}
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{{ file.file.url }}"
+                            target="_blank"
+                            class="secondary-btn">
+
+                            <i class="bi bi-download"></i>
+
+                            Download
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <i class="bi bi-folder2-open"></i>
+
+            <h3>
+                No files yet
+            </h3>
+
+            <p>
+                Upload files that you want this client to access.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

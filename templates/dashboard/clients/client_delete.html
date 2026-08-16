@@ -1,0 +1,57 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+
+Delete Client
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <h1>
+
+        Delete Client
+
+    </h1>
+
+</div>
+
+<div class="delete-box">
+
+    <p>
+
+        Are you sure you want to delete
+
+        <strong>
+
+            {{ client.user.get_full_name }}
+
+        </strong>?
+
+    </p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button class="danger-btn">
+
+            Delete
+
+        </button>
+
+        <a href="{% url 'dashboard_clients' %}"
+
+           class="secondary-btn">
+
+            Cancel
+
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+
+Website Settings
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            Website Settings
+
+        </h1>
+
+        <p>
+
+            Update your website information.
+
+        </p>
+
+    </div>
+
+</div>
+
+<form method="POST"
+
+      enctype="multipart/form-data"
+
+      class="project-form">
+
+    {% csrf_token %}
+
+    {% for field in form %}
+
+    <div class="form-section">
+
+        <label>
+
+            {{ field.label }}
+
+        </label>
+
+        {{ field }}
+
+        {% if field.help_text %}
+
+        <small>
+
+            {{ field.help_text }}
+
+        </small>
+
+        {% endif %}
+
+        {{ field.errors }}
+
+    </div>
+
+    {% endfor %}
+
+    <button class="primary-btn">
+
+        Save Settings
+
+    </button>
+
+</form>
+
+{% endblock %}

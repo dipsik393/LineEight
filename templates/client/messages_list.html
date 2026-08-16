@@ -1,0 +1,172 @@
+{% extends "client/client_base.html" %}
+{% load static %}
+
+
+{% block title %}
+
+Messages | Client Portal
+
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/client-messages.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="client-messages-page">
+
+    <div class="messages-container">
+
+        <!-- HEADER -->
+
+        <div class="messages-header">
+
+            <div>
+
+                <span class="section-tag">
+
+                    CLIENT MESSAGES
+
+                </span>
+
+                <h1>
+
+                    Messages
+
+                </h1>
+
+                <p>
+
+                    View and manage your conversations with the Line Eight team.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGE LIST -->
+
+        <div class="message-card">
+
+            <div class="message-list">
+
+                {% for item in messages %}
+
+                    <a
+                        href="{% url 'client_messages' item.project.id %}"
+                        class="message-item-link"
+                    >
+
+                        <div class="message-item">
+
+                            <div class="message-avatar">
+
+                                {% if item.sender == request.user %}
+
+                                    <i class="bi bi-person"></i>
+
+                                {% else %}
+
+                                    <i class="bi bi-building"></i>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="message-content">
+
+                                <div class="message-meta">
+
+                                    <strong>
+
+                                        {% if item.sender == request.user %}
+
+                                            You
+
+                                        {% else %}
+
+                                            Line Eight
+
+                                        {% endif %}
+
+                                    </strong>
+
+                                    <span>
+
+                                        {{ item.created_at|date:"M d, Y • H:i" }}
+
+                                    </span>
+
+                                </div>
+
+
+                                <div class="message-project">
+
+                                    <i class="bi bi-folder2-open"></i>
+
+                                    {{ item.project.title }}
+
+                                </div>
+
+
+                                <div class="message-bubble">
+
+                                    {{ item.message|truncatechars:150 }}
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="message-arrow">
+
+                                <i class="bi bi-chevron-right"></i>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                {% empty %}
+
+                    <div class="messages-empty">
+
+                        <i class="bi bi-chat-dots"></i>
+
+                        <h3>
+
+                            No messages yet
+
+                        </h3>
+
+                        <p>
+
+                            Your conversations with the Line Eight team will appear here.
+
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

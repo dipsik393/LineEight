@@ -1,0 +1,335 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}
+
+Message | {{ message.client.company }}
+
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/dashboard-message-detail.css' %}"
+>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <a
+            href="{% url 'dashboard_messages' %}"
+            class="back-link">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Messages
+
+        </a>
+
+        <h1>
+
+            {{ message.client.company }}
+
+        </h1>
+
+        <p>
+
+            {{ message.project.title }}
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="message-detail-layout">
+
+
+    <!-- =========================================
+         CLIENT INFORMATION
+    ========================================== -->
+
+    <aside class="message-client-card">
+
+        <div class="client-avatar">
+
+            {% if message.client.avatar %}
+
+                <img
+                    src="{{ message.client.avatar.url }}"
+                    alt="{{ message.client.company }}">
+
+            {% else %}
+
+                <i class="bi bi-person"></i>
+
+            {% endif %}
+
+        </div>
+
+
+        <h3>
+
+            {{ message.client.user.get_full_name }}
+
+        </h3>
+
+
+        <p class="client-company">
+
+            {{ message.client.company }}
+
+        </p>
+
+
+        <div class="client-details">
+
+            <div>
+
+                <i class="bi bi-envelope"></i>
+
+                <span>
+
+                    {{ message.client.user.email }}
+
+                </span>
+
+            </div>
+
+
+            {% if message.client.phone %}
+
+            <div>
+
+                <i class="bi bi-telephone"></i>
+
+                <span>
+
+                    {{ message.client.phone }}
+
+                </span>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <a
+            href="{% url 'dashboard_client_edit' message.client.id %}"
+            class="secondary-btn">
+
+            <i class="bi bi-person-gear"></i>
+
+            View Client
+
+        </a>
+
+    </aside>
+
+
+    <!-- =========================================
+         CONVERSATION
+    ========================================== -->
+
+    <section class="message-conversation">
+
+        <div class="conversation-header">
+
+            <div>
+
+                <h2>
+
+                    Conversation
+
+                </h2>
+
+                <p>
+
+                    {{ message.project.title }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="conversation-list">
+
+
+            {% for item in conversation %}
+
+            <div
+                class="conversation-message
+                {% if item.sender == request.user %}
+                    staff-message
+                {% else %}
+                    client-message
+                {% endif %}"
+            >
+
+                <div class="conversation-avatar">
+
+                    {% if item.sender == request.user %}
+
+                        <i class="bi bi-building"></i>
+
+                    {% else %}
+
+                        <i class="bi bi-person"></i>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="conversation-content">
+
+                    <div class="conversation-meta">
+
+                        <strong>
+
+                            {% if item.sender == request.user %}
+
+                                Line Eight
+
+                            {% else %}
+
+                                {{ item.sender.get_full_name }}
+
+                            {% endif %}
+
+                        </strong>
+
+
+                        <span>
+
+                            {{ item.created_at|date:"M d, Y H:i" }}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="conversation-bubble">
+
+                        {{ item.message|linebreaks }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty-state">
+
+                <i class="bi bi-chat-square-text"></i>
+
+                <h3>
+
+                    No messages
+
+                </h3>
+
+                <p>
+
+                    This conversation has no messages yet.
+
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+        <!-- =========================================
+             REPLY FORM
+        ========================================== -->
+
+        <div class="reply-box">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <label for="message">
+
+                    Reply to client
+
+                </label>
+
+
+                <textarea
+                    name="message"
+                    id="message"
+                    rows="5"
+                    placeholder="Write your response..."
+                    required></textarea>
+
+
+                <div class="reply-actions">
+
+                    <span>
+
+                        <i class="bi bi-shield-check"></i>
+
+                        Reply will be sent to the client portal.
+
+                    </span>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+
+                        <i class="bi bi-send"></i>
+
+                        Send Reply
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- =========================================
+             DELETE
+        ========================================== -->
+
+        <div class="message-danger-zone">
+
+            <a
+                href="{% url 'dashboard_message_delete' message.id %}"
+                class="danger-btn">
+
+                <i class="bi bi-trash"></i>
+
+                Delete Message
+
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+{% endblock %}

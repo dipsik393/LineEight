@@ -1,0 +1,49 @@
+{% load static %}
+
+<section class="blog-hero">
+
+    <div class="container">
+        
+        <span class="section-tag">
+            OUR BLOG
+        </span>
+
+        <h1>
+            Insights &
+            <span>Resources.</span>
+        </h1>
+
+        <p>
+             <span>Creative ideas</span> and practical insights that help
+              brands grow through design, photography, videography and web development.
+        </p>
+         
+        <a href="#articles" class="blog-btn">
+             Explore Articles
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+
+</section>
+
+<form method="GET" action="{% url 'blog' %}" class="blog-search">
+
+    <input
+
+        type="text"
+
+        name="q"
+
+        placeholder="Search articles..."
+
+        value="{{ search }}"
+
+    >
+
+    <button type="submit">
+
+        <i class="bi bi-search"></i>
+
+    </button>
+
+</form>

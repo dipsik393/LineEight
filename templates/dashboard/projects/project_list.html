@@ -1,0 +1,146 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Projects
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Projects</h1>
+
+        <p>Manage your portfolio projects.</p>
+
+    </div>
+
+    <a href="{% url 'dashboard_project_create' %}" class="primary-btn">
+
+        <i class="bi bi-plus-circle"></i>
+
+        Add Project
+
+    </a>
+
+</div>
+
+<div class="dashboard-card">
+
+    <table class="dashboard-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Image</th>
+
+                <th>Title</th>
+
+                <th>Client</th>
+
+                <th>Status</th>
+
+                <th>Featured</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for project in projects %}
+
+            <tr>
+
+                <td>
+
+                    <img src="{{ project.hero_image.url }}"
+                         width="80">
+
+                </td>
+
+                <td>
+
+                    {{ project.title }}
+
+                </td>
+
+                <td>
+
+                    {{ project.client }}
+
+                </td>
+
+                <td>
+
+                    {{ project.status }}
+
+                </td>
+
+                <td>
+
+                    {% if project.featured %}
+
+                        ✅
+
+                    {% else %}
+
+                        ❌
+
+                    {% endif %}
+
+                </td>
+
+                <td class=" project-actions">
+
+                    <a href="{% url 'dashboard_project_edit' project.id %}"
+                       class="secondary-btn">
+                        Edit
+                    </a>
+                     
+
+                    
+
+                    <a href="{% url 'dashboard_gallery' project.id %}" class="primary-btn">
+                        Gallery
+                    </a>
+                    <a href="{% url 'dashboard_project_process' project.id %}" class="secondary-btn">
+                        
+                       Process
+
+                    </a>   
+
+                    <a href="{% url 'dashboard_project_delete' project.id %}" class="danger-btn">
+
+                        Delete
+
+                    </a>
+                </td>
+
+            </tr>
+
+        {% empty %}
+
+            <tr>
+
+                <td colspan="6">
+
+                    No projects yet.
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

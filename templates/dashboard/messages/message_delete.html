@@ -1,0 +1,84 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Delete Message
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            Delete Message
+
+        </h1>
+
+        <p>
+
+            This action cannot be undone.
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="form-section">
+
+    <h2>
+
+        Are you sure?
+
+    </h2>
+
+    <p>
+
+        You are about to permanently delete the message from
+
+        <strong>{{ message.name }}</strong>.
+
+    </p>
+
+    <div class="message-box">
+
+        <strong>Subject:</strong>
+
+        {{ message.subject|default:"No Subject" }}
+
+        <br><br>
+
+        {{ message.message|truncatewords:40 }}
+
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="project-actions">
+
+            <button
+                type="submit"
+                class="danger-btn">
+
+                Delete Message
+
+            </button>
+
+            <a href="{% url 'dashboard_message_detail' message.id %}"
+               class="secondary-btn">
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

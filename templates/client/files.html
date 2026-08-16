@@ -1,0 +1,127 @@
+{% extends "client/client_base.html" %}
+{% load static %}
+
+{% block title %}
+My Files | Client Portal
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/client-files.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="client-page-header">
+
+    <div>
+
+        <span class="section-tag">
+            PROJECT FILES
+        </span>
+
+        <h1>
+            My Files
+        </h1>
+
+        <p>
+            Access files shared with you by the Line Eight team.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="client-files-list">
+
+    {% for file in files %}
+
+        <div class="client-file-card">
+
+            <div class="file-icon">
+
+                <i class="bi bi-file-earmark-text"></i>
+
+            </div>
+
+
+            <div class="file-info">
+
+                <h3>
+                    {{ file.name }}
+                </h3>
+
+                <p>
+
+                    Project:
+
+                    <strong>
+                        {{ file.project.title }}
+                    </strong>
+
+                </p>
+
+
+                {% if file.description %}
+
+                    <span class="file-description">
+
+                        {{ file.description }}
+
+                    </span>
+
+                {% endif %}
+
+
+                <small>
+
+                    Added
+                    {{ file.created_at|date:"M d, Y" }}
+
+                </small>
+
+            </div>
+
+
+            <div class="file-action">
+
+                <a
+                     href="{% url 'client_file_download' file.id %}"
+                    class="primary-btn"
+                >
+                    <i class="bi bi-download"></i>
+                    Download
+                </a>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="client-empty-state">
+
+            <i class="bi bi-folder-x"></i>
+
+            <h3>
+                No Files Yet
+            </h3>
+
+            <p>
+                Files shared with you will appear here.
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

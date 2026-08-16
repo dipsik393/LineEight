@@ -1,39 +1,47 @@
 {% load static %}
 
-<section class="portfolio " id="portfolio">
+<section class="portfolio" id="portfolio">
 
     <div class="container">
 
         <div class="portfolio-header">
 
             <span class="section-tag">
+
                 SELECTED WORK
+
             </span>
 
             <h2>
+
                 Featured Projects
+
             </h2>
 
         </div>
 
         <div class="portfolio-wrapper">
 
-            <!-- Project 1 -->
+            {% for project in featured_projects %}
 
-            <a href="https://pase.africa/"
-               target="_blank"
+            <a href="{% url 'project_detail' project.slug %}"
+
                class="project-card">
 
                 <div class="project-image">
 
-                    <img src="{% static 'images/portfolio/pase2.jpg' %}"
-                         alt="Pan African Society of Endometriosis">
+                    <img src="{{ project.hero_image.url }}"
+
+                         alt="{{ project.title }}">
 
                     <div class="project-overlay">
 
                         <span>
-                            Visit Website
+
+                            View Project
+
                             <i class="bi bi-arrow-up-right"></i>
+
                         </span>
 
                     </div>
@@ -42,121 +50,34 @@
 
                 <div class="project-info">
 
-                    <small>Healthcare Conference</small>
+                    <small>
+
+                        {{ project.service }}
+
+                    </small>
 
                     <h3>
-                        Pan African Society of Endometriosis
+
+                        {{ project.title }}
+
                     </h3>
 
                 </div>
 
             </a>
 
-            <!-- Project 2 -->
+            {% empty %}
 
-            <a href="https://astronhealthcare.africa/"
-               target="_blank"
-               class="project-card">
+            <p>
 
-                <div class="project-image">
+                No featured projects available.
 
-                    <img src="{% static 'images/portfolio/ashc.jpg' %}"
-                         alt="Astron Health Care">
+            </p>
 
-                    <div class="project-overlay">
-
-                        <span>
-                            Visit Website
-                            <i class="bi bi-arrow-up-right"></i>
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="project-info">
-
-                    <small>Healthcare Website</small>
-
-                    <h3>
-                        Astron Health Care
-                    </h3>
-
-                </div>
-
-            </a>
-
-            <!-- Project 3 -->
-
-            <a href="https://hpbsurgeonke.com/"
-               target="_blank"
-               class="project-card">
-
-                <div class="project-image">
-
-                    <img src="{% static 'images/portfolio/kg2.jpg' %}"
-                         alt="HepatoBiliary Surgeon">
-
-                    <div class="project-overlay">
-
-                        <span>
-                            Visit Website
-                            <i class="bi bi-arrow-up-right"></i>
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="project-info">
-
-                    <small>Medical Specialist</small>
-
-                    <h3>
-                        HepatoBiliary Surgeon
-                    </h3>
-
-                </div>
-
-            </a>
-
-            <!-- Project 4 -->
-
-            <a href="https://healingmamaafrica.com/"
-               target="_blank"
-               class="project-card">
-
-                <div class="project-image">
-
-                    <img src="{% static 'images/portfolio/ma2.jpg' %}"
-                         alt="Healing Mama Africa">
-
-                    <div class="project-overlay">
-
-                        <span>
-                            Visit Website
-                            <i class="bi bi-arrow-up-right"></i>
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="project-info">
-
-                    <small>NGO Website</small>
-
-                    <h3>
-                        Healing Mama Africa
-                    </h3>
-
-                </div>
-
-            </a>
-
-            <!-- View More -->
+            {% endfor %}
 
             <a href="{% url 'projects' %}"
+
                class="project-card more-projects">
 
                 <div class="more-icon">
@@ -166,7 +87,9 @@
                 </div>
 
                 <h3>
+
                     View Other Projects
+
                 </h3>
 
             </a>

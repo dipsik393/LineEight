@@ -1,0 +1,175 @@
+<section class="blog-cards" id="articles">
+
+    <div class="container">
+
+        <div class="blog-heading">
+
+            <span class="section-tag">
+                LATEST ARTICLES
+            </span>
+
+            <h2>
+                Learn. Create. Grow.
+            </h2>
+
+            <p>
+                Explore our latest insights on branding, photography,
+                videography and web design.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for blog in page_obj %}
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="blog-card">
+
+                    {% if blog.featured_image %}
+
+                        <img src="{{ blog.featured_image.url }}"
+                             alt="{{ blog.title }}">
+
+                    {% endif %}
+
+                    <div class="blog-content">
+
+                        <span>
+
+                            {{ blog.category }}
+
+                        </span>
+
+                        <h3>
+
+                            {{ blog.title }}
+
+                        </h3>
+
+                        <p>
+
+                            {{ blog.excerpt|truncatewords:20 }}
+
+                        </p>
+
+                        <div class="blog-meta">
+
+                            <small>
+
+                                {{ blog.created_at|date:"M d, Y" }}
+
+                            </small>
+
+                            <small>
+
+                                {{ blog.reading_time }} min read
+
+                            </small>
+
+                        </div>
+
+                        <a href="{{ blog.get_absolute_url }}">
+
+                            Read Article
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="text-center">
+
+                    <h3>
+
+                        No articles found
+
+                    </h3>
+
+                    <p>
+
+                        Try another search or category.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Pagination -->
+
+        {% if page_obj.has_other_pages %}
+
+        <div class="pagination-wrapper">
+
+            <nav class="pagination">
+
+                {% if page_obj.has_previous %}
+
+                    <a href="?page={{ page_obj.previous_page_number }}{% if search %}&q={{ search }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Previous
+
+                    </a>
+
+                {% endif %}
+
+                {% for page in page_obj.paginator.page_range %}
+
+                    {% if page == page_obj.number %}
+
+                        <span class="active">
+
+                            {{ page }}
+
+                        </span>
+
+                    {% else %}
+
+                        <a href="?page={{ page }}{% if search %}&q={{ search }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}">
+
+                            {{ page }}
+
+                        </a>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+
+                    <a href="?page={{ page_obj.next_page_number }}{% if search %}&q={{ search }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}">
+
+                        Next
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>

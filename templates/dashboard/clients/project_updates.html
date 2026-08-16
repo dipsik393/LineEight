@@ -1,0 +1,119 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Project Updates
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="section-tag">
+                PROJECT
+            </span>
+
+            <h1>
+                {{ project.title }}
+            </h1>
+
+            <p>
+                Manage updates for this project.
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'project_update_create' project.id %}"
+            class="primary-btn">
+
+            <i class="bi bi-plus-lg"></i>
+
+            Add Update
+
+        </a>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        {% if updates %}
+
+            <div class="updates-list">
+
+                {% for update in updates %}
+
+                    <div class="update-row">
+
+                        <div class="update-icon">
+
+                            <i class="bi bi-check-circle"></i>
+
+                        </div>
+
+
+                        <div class="update-content">
+
+                            <div class="update-meta">
+
+                                <span>
+                                    {{ update.status }}
+                                </span>
+
+                                <small>
+                                    {{ update.created_at|date:"M d, Y" }}
+                                </small>
+
+                            </div>
+
+                            <h3>
+                                {{ update.title }}
+                            </h3>
+
+                            <p>
+                                {{ update.description }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <i class="bi bi-clock-history"></i>
+
+                <h3>
+                    No updates yet
+                </h3>
+
+                <p>
+                    Add the first update for this project.
+                </p>
+
+                <a
+                    href="{% url 'project_update_create' project.id %}"
+                    class="primary-btn">
+
+                    Add First Update
+
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+
+Project Process
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            {{ project.title }}
+
+        </h1>
+
+        <p>
+
+            Manage project process steps.
+
+        </p>
+
+    </div>
+
+</div>
+
+<form
+    method="POST"
+    class="dashboard-form">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button class="primary-btn">
+
+        Add Step
+
+    </button>
+
+</form>
+
+<hr>
+
+<div class="projects-grid">
+
+    {% for step in steps %}
+
+    <div class="project-card">
+
+        <div class="project-info">
+
+            <h3>
+
+                {{ step.number }}. {{ step.title }}
+
+            </h3>
+
+            <p>
+
+                {{ step.description }}
+
+            </p>
+
+            <small>
+
+                {{ step.icon }}
+
+            </small>
+
+        </div>
+        
+        <div class="project-actions">
+
+            <a href="{% url 'dashboard_process_edit' step.id %}" class="secondary-btn">
+                Edit
+            </a>
+
+            <a href="{% url 'dashboard_process_delete' step.id %}" class="danger-btn">
+                Delete
+            </a>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p>
+
+        No process steps yet.
+
+    </p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

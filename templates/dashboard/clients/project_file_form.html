@@ -1,0 +1,108 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Upload Project File
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <span class="section-tag">
+            PROJECT FILE
+        </span>
+
+        <h1>
+            Upload File
+        </h1>
+
+        <p>
+            {{ project.title }}
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-card form-card">
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+
+            <label for="name">
+                File Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="e.g. Final Logo"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                name="description"
+                rows="4"
+                placeholder="Briefly describe this file"></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="file">
+                Select File
+            </label>
+
+            <input
+                type="file"
+                id="file"
+                name="file"
+                required>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <a
+                href="{% url 'project_files' project.id %}"
+                class="secondary-btn">
+
+                Cancel
+
+            </a>
+
+            <button
+                type="submit"
+                class="primary-btn">
+
+                <i class="bi bi-cloud-upload"></i>
+
+                Upload File
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

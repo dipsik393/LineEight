@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ project.title }} | Line Eight
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/project-detail.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% include "includes/project_hero.html" %}
+
+{% include "includes/project_overview.html" %}
+
+{% include "includes/project_gallery.html" %}
+
+{% include "includes/project_process.html" %}
+
+{% include "includes/project_related.html" %}
+
+{% include "includes/project_cta.html" %}
+
+{% endblock %}

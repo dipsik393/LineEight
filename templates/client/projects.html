@@ -1,0 +1,164 @@
+{% extends "client/client_base.html" %}
+{% load static %}
+
+{% block title %}
+My Projects | Client Portal
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/client-projects.css' %}"
+>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="client-page-header">
+
+    <div>
+
+        <span class="section-tag">
+            PROJECTS
+        </span>
+
+        <h1>
+            My Projects
+        </h1>
+
+        <p>
+            View and manage your projects with Line Eight.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="client-project-grid">
+
+    {% for project in projects %}
+
+        <article class="client-project-card">
+
+            <div class="project-image">
+
+                {% if project.hero_image %}
+
+                    <img
+                        src="{{ project.hero_image.url }}"
+                        alt="{{ project.title }}"
+                    >
+
+                {% else %}
+
+                    <div class="project-image-placeholder">
+
+                        <i class="bi bi-folder2-open"></i>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="project-card-content">
+
+                <div class="project-card-top">
+
+                    <span class="project-status">
+
+                        {{ project.get_status_display }}
+
+                    </span>
+
+                </div>
+
+
+                <h2>
+
+                    {{ project.title }}
+
+                </h2>
+
+
+                {% if project.short_description %}
+
+                    <p>
+
+                        {{ project.short_description|truncatewords:20 }}
+
+                    </p>
+
+                {% endif %}
+
+
+                <div class="project-card-meta">
+
+                    {% if project.service %}
+
+                        <span>
+
+                            <i class="bi bi-briefcase"></i>
+
+                            {{ project.service }}
+
+                        </span>
+
+                    {% endif %}
+
+
+                    {% if project.duration %}
+
+                        <span>
+
+                            <i class="bi bi-clock"></i>
+
+                            {{ project.duration }}
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <a
+                    href="{% url 'client_project_detail' project.id %}"
+                    class="primary-btn"
+                >
+
+                    View Project
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="client-empty-state">
+
+            <i class="bi bi-folder-x"></i>
+
+            <h3>
+                No Projects Yet
+            </h3>
+
+            <p>
+                Your Line Eight projects will appear here.
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

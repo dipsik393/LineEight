@@ -1,0 +1,21 @@
+<header class="topbar">
+
+    <h2>Dashboard</h2>
+
+    <div class="profile">
+
+        <i class="bi bi-person-circle"></i>
+
+        {% if request.user.is_authenticated %}
+
+            {{ request.user.username }}
+
+        {% else %}
+
+            Admin
+
+        {% endif %}
+
+    </div>
+
+</header>

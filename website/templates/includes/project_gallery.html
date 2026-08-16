@@ -1,5 +1,3 @@
-{% load static %}
-
 <section class="project-gallery" id="gallery">
 
     <div class="container">
@@ -7,50 +5,28 @@
         <div class="gallery-heading">
 
             <span class="section-tag">
+
                 PROJECT GALLERY
+
             </span>
 
-            <h2>Explore the Website</h2>
+            <h2>
+
+                Explore the Website
+
+            </h2>
 
             <p>
-                A closer look at the pages designed and developed for the
-                Pan African Society of Endometriosis.
+
+                Browse screenshots uploaded for this project.
+
             </p>
 
         </div>
 
         <div class="gallery-grid">
 
-            <!-- Homepage -->
-            <div class="gallery-card">
-
-                <div class="browser-frame">
-
-                    <div class="browser-top">
-
-                        <div class="browser-controls">
-
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-
-                        </div>
-
-                        <div class="browser-address">
-                            pase.africa
-                        </div>
-
-                    </div>
-
-                    <img src="{% static 'images/projects/pase/home.jpg' %}" alt="Homepage">
-
-                </div>
-
-                <h4>Homepage</h4>
-
-            </div>
-
-            <!-- About -->
+            {% for image in project.gallery.all %}
 
             <div class="gallery-card">
 
@@ -61,144 +37,63 @@
                         <div class="browser-controls">
 
                             <span class="dot red"></span>
+
                             <span class="dot yellow"></span>
+
                             <span class="dot green"></span>
 
                         </div>
 
                         <div class="browser-address">
-                            pase.africa/about
+
+                            {% if project.website_url %}
+
+                                {{ project.website_url }}
+
+                            {% else %}
+
+                                Line Eight Project
+
+                            {% endif %}
+
                         </div>
 
                     </div>
 
-                    <img src="{% static 'images/projects/pase/about.jpg' %}" alt="About">
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ image.title }}"
+                        class="gallery-image">
 
                 </div>
 
-                <h4>About Page</h4>
+                <h4>
+
+                    {{ image.title }}
+
+                </h4>
 
             </div>
 
-            <!-- Events -->
+            {% empty %}
 
-            <div class="gallery-card">
+            <div class="empty-gallery">
 
-                <div class="browser-frame">
+                <h3>
 
-                    <div class="browser-top">
+                    No gallery images uploaded yet.
 
-                        <div class="browser-controls">
+                </h3>
 
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
+                <p>
 
-                        </div>
+                    Upload images from the dashboard to showcase this project.
 
-                        <div class="browser-address">
-                            pase.africa/events
-                        </div>
-
-                    </div>
-
-                    <img src="{% static 'images/projects/pase/events.jpg' %}" alt="Events">
-
-                </div>
-
-                <h4>Events</h4>
+                </p>
 
             </div>
 
-            <!-- Resources -->
-
-            <div class="gallery-card">
-
-                <div class="browser-frame">
-
-                    <div class="browser-top">
-
-                        <div class="browser-controls">
-
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-
-                        </div>
-
-                        <div class="browser-address">
-                            pase.africa/resources
-                        </div>
-
-                    </div>
-
-                    <img src="{% static 'images/projects/pase/resources.jpg' %}" alt="Resources">
-
-                </div>
-
-                <h4>Resources</h4>
-
-            </div>
-
-            <!-- News -->
-
-            <div class="gallery-card">
-
-                <div class="browser-frame">
-
-                    <div class="browser-top">
-
-                        <div class="browser-controls">
-
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-
-                        </div>
-
-                        <div class="browser-address">
-                            pase.africa/news
-                        </div>
-
-                    </div>
-
-                    <img src="{% static 'images/projects/pase/news.jpg' %}" alt="News">
-
-                </div>
-
-                <h4>News</h4>
-
-            </div>
-
-            <!-- Contact -->
-
-            <div class="gallery-card">
-
-                <div class="browser-frame">
-
-                    <div class="browser-top">
-
-                        <div class="browser-controls">
-
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-
-                        </div>
-
-                        <div class="browser-address">
-                            pase.africa/contact
-                        </div>
-
-                    </div>
-
-                    <img src="{% static 'images/projects/pase/contact.jpg' %}" alt="Contact">
-
-                </div>
-
-                <h4>Contact</h4>
-
-            </div>
+            {% endfor %}
 
         </div>
 

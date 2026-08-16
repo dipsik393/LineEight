@@ -1,0 +1,181 @@
+.inquiry-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.inquiry-main,
+.inquiry-sidebar {
+    padding: 28px;
+}
+
+.inquiry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.inquiry-header h2 {
+    margin: 12px 0 0;
+}
+
+.section-tag {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.inquiry-message {
+    padding: 28px 0;
+}
+
+.inquiry-message h3 {
+    margin-bottom: 14px;
+}
+
+.inquiry-message p {
+    line-height: 1.8;
+    color: var(--secondary);
+}
+
+.inquiry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+.inquiry-meta span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.card-heading {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-heading h3 {
+    margin: 0;
+}
+
+.contact-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 0;
+}
+
+.contact-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: white;
+    font-size: 22px;
+}
+
+.contact-profile strong {
+    display: block;
+}
+
+.contact-profile span {
+    display: block;
+    margin-top: 4px;
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-details > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.contact-details > div > i {
+    font-size: 18px;
+    color: var(--primary);
+    margin-top: 2px;
+}
+
+.contact-details small {
+    display: block;
+    color: var(--secondary);
+    margin-bottom: 4px;
+}
+
+.contact-details a,
+.contact-details span {
+    color: var(--text);
+    text-decoration: none;
+    word-break: break-word;
+}
+
+.inquiry-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 14px;
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: var(--primary);
+}
+
+@media (max-width: 900px) {
+
+    .inquiry-layout {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .inquiry-main,
+    .inquiry-sidebar {
+        padding: 20px;
+    }
+
+    .inquiry-header {
+        flex-direction: column;
+    }
+
+    .inquiry-actions {
+        flex-direction: column;
+    }
+
+    .inquiry-actions a {
+        width: 100%;
+        justify-content: center;
+    }
+
+}

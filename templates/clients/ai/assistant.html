@@ -1,0 +1,331 @@
+{% extends "client/client_base.html" %}
+{% load static %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/client-ai.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="client-ai-page">
+
+    <div class="container">
+
+        <div class="client-ai-layout">
+
+            <!-- =====================================
+                 CONVERSATION SIDEBAR
+            ====================================== -->
+
+            <aside class="client-ai-sidebar">
+
+                <div class="client-ai-sidebar-header">
+
+                    <h3>
+                        <i class="bi bi-chat-square-text"></i>
+                        Conversations
+                    </h3>
+
+                    <a
+                        href="{% url 'client_new_ai_conversation' %}"
+                        class="client-ai-new-chat"
+                    >
+                        <i class="bi bi-plus-lg"></i>
+                        New
+                    </a>
+
+                </div>
+
+
+                <div class="client-ai-conversations">
+
+                    {% for item in conversations %}
+
+                        <a
+                            href="{% url 'client_ai_conversation' item.id %}"
+                            class="client-ai-conversation
+                            {% if item.id == conversation.id %}
+                                active
+                            {% endif %}"
+                        >
+
+                            <div class="conversation-icon">
+
+                                <i class="bi bi-chat"></i>
+
+                            </div>
+
+                            <div class="conversation-info">
+
+                                <strong>
+                                    {{ item.title|truncatechars:30 }}
+                                </strong>
+
+                                <span>
+                                    {{ item.updated_at|date:"M d, H:i" }}
+                                </span>
+
+                            </div>
+
+                        </a>
+
+                    {% empty %}
+
+                        <div class="client-ai-no-conversations">
+
+                            <i class="bi bi-chat"></i>
+
+                            <p>
+                                No conversations yet.
+                            </p>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </aside>
+
+
+            <!-- =====================================
+                 MAIN AI
+            ====================================== -->
+
+            <main class="client-ai-main">
+
+                <!-- HEADER -->
+
+                <div class="client-ai-header">
+
+                    <h1>
+
+                        <i class="bi bi-stars"></i>
+
+                        AI Assistant
+
+                    </h1>
+
+                    <p>
+                        Ask me about your projects,
+                        files, updates and messages.
+                    </p>
+
+                </div>
+
+
+                <!-- CHAT -->
+
+                <div class="client-ai-chat">
+
+
+                    <!-- CHAT HEADER -->
+
+                    <div class="client-ai-chat-header">
+
+                        <div class="client-ai-chat-title">
+
+                            <div class="client-ai-avatar">
+
+                                <i class="bi bi-robot"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Line Eight Assistant
+                                </h3>
+
+                                <span>
+                                    {{ conversation.title }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="client-ai-status">
+
+                            <span
+                                class="client-ai-status-dot"
+                            ></span>
+
+                            Online
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGES -->
+
+                    <div
+                        class="client-ai-messages"
+                        id="clientAiMessages"
+                    >
+
+                        {% if messages %}
+
+                            {% for message in messages %}
+
+                                <div
+                                    class="client-ai-message
+                                    {{ message.role }}"
+                                >
+
+                                    <div
+                                        class="client-ai-bubble"
+                                    >
+
+                                        <div
+                                            class="client-ai-message-label"
+                                        >
+
+                                            {% if message.role == "user" %}
+
+                                                <i class="bi bi-person-fill"></i>
+                                                You
+
+                                            {% else %}
+
+                                                <i class="bi bi-robot"></i>
+                                                Line Eight AI
+
+                                            {% endif %}
+
+                                        </div>
+
+
+                                        <div
+                                            class="client-ai-message-content"
+                                        >
+
+                                            {{ message.content|linebreaksbr }}
+
+                                        </div>
+
+
+                                        <div
+                                            class="client-ai-time"
+                                        >
+
+                                            {{ message.created_at|date:"H:i" }}
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <div class="client-ai-empty">
+
+                                <div class="client-ai-empty-icon">
+
+                                    <i class="bi bi-robot"></i>
+
+                                </div>
+
+                                <h3>
+                                    How can I help?
+                                </h3>
+
+                                <p>
+                                    Ask me about your projects,
+                                    updates, files or messages.
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- INPUT -->
+
+                    <div class="client-ai-input-area">
+
+                        <form
+                            method="POST"
+                            class="client-ai-form"
+                        >
+
+                            {% csrf_token %}
+
+                            <input
+                                type="text"
+                                name="message"
+                                class="client-ai-input"
+                                placeholder="Ask about your projects..."
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="submit"
+                                class="client-ai-send"
+                            >
+
+                                <i class="bi bi-send-fill"></i>
+
+                            </button>
+
+                        </form>
+
+
+                        <div class="client-ai-input-note">
+
+                            Line Eight AI can help you understand
+                            your project information.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const chat =
+            document.getElementById(
+                "clientAiMessages"
+            );
+
+        if (chat) {
+
+            chat.scrollTop =
+                chat.scrollHeight;
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,196 @@
+.client-page-header {
+    margin-bottom: 35px;
+}
+
+.client-page-header .section-tag {
+    display: inline-block;
+    margin-bottom: 10px;
+
+    color: #29A9E1;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.client-page-header h1 {
+    margin: 0 0 8px;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.client-page-header p {
+    margin: 0;
+
+    color: #8FA5B8;
+}
+
+
+.client-files-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.client-file-card {
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    border: 1px solid #123042;
+    border-radius: 16px;
+
+    background: #09141D;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.client-file-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #29A9E1;
+}
+
+
+.file-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(41, 169, 225, 0.1);
+
+    color: #29A9E1;
+
+    font-size: 24px;
+}
+
+
+.file-info {
+    flex: 1;
+}
+
+
+.file-info h3 {
+    margin: 0 0 6px;
+
+    font-size: 17px;
+}
+
+
+.file-info p {
+    margin: 0 0 5px;
+
+    color: #8FA5B8;
+
+    font-size: 13px;
+}
+
+
+.file-info strong {
+    color: #F5F7FA;
+}
+
+
+.file-description {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #8FA5B8;
+
+    font-size: 12px;
+}
+
+
+.file-info small {
+    color: #667D8F;
+
+    font-size: 11px;
+}
+
+
+.file-action {
+    flex-shrink: 0;
+}
+
+
+.client-empty-state {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    border: 1px dashed #123042;
+    border-radius: 18px;
+
+    background: #09141D;
+}
+
+
+.client-empty-state i {
+    display: block;
+
+    margin-bottom: 15px;
+
+    color: #29A9E1;
+
+    font-size: 40px;
+}
+
+
+.client-empty-state h3 {
+    margin-bottom: 8px;
+}
+
+
+.client-empty-state p {
+    margin: 0;
+
+    color: #8FA5B8;
+}
+
+
+@media (max-width: 700px) {
+
+    .client-file-card {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    .file-info {
+        min-width: calc(100% - 72px);
+    }
+
+
+    .file-action {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+
+    .file-action .primary-btn {
+        width: 100%;
+    }
+
+
+    .client-page-header h1 {
+        font-size: 28px;
+    }
+
+}

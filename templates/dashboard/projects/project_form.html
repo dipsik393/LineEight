@@ -1,0 +1,278 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+
+{% if form.instance.pk %}
+Edit Project
+{% else %}
+New Project
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            {% if form.instance.pk %}
+                Edit Project
+            {% else %}
+                New Project
+            {% endif %}
+
+        </h1>
+
+        <p>
+
+            {% if form.instance.pk %}
+                Update your portfolio project.
+            {% else %}
+                Add a new portfolio project.
+            {% endif %}
+
+        </p>
+
+    </div>
+
+</div>
+
+{% if form.errors %}
+
+<div class="alert alert-danger">
+
+    Please correct the errors below.
+
+</div>
+
+{% endif %}
+
+<form
+    method="POST"
+    enctype="multipart/form-data"
+    class="project-form">
+
+    {% csrf_token %}
+
+    <!-- ==========================
+         BASIC INFORMATION
+    =========================== -->
+
+    <div class="form-section">
+
+        <h2>
+
+            Basic Information
+
+        </h2>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>Project Name</label>
+
+                {{ form.title }}
+
+                {{ form.title.errors }}
+
+            </div>
+
+            <div>
+
+                <label>Client</label>
+
+                {{ form.client }}
+
+                {{ form.client.errors }}
+
+            </div>
+
+            <div>
+
+                <label>Industry</label>
+
+                {{ form.industry }}
+
+                {{ form.industry.errors }}
+
+            </div>
+
+            <div>
+
+                <label>Service</label>
+
+                {{ form.service }}
+
+                {{ form.service.errors }}
+
+            </div>
+
+            <div>
+
+                <label>Duration</label>
+
+                {{ form.duration }}
+
+                {{ form.duration.errors }}
+
+            </div>
+
+            <div>
+
+                <label>Website</label>
+
+                {{ form.website_url }}
+
+                {{ form.website_url.errors }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================
+         HERO IMAGE
+    =========================== -->
+
+    <div class="form-section">
+
+        <h2>
+
+            Hero Image
+
+        </h2>
+
+        {{ form.hero_image }}
+
+        {{ form.hero_image.errors }}
+
+    </div>
+
+    <!-- ==========================
+         DESCRIPTION
+    =========================== -->
+
+    <div class="form-section">
+
+        <h2>
+
+            Project Description
+
+        </h2>
+
+        <div class="form-group">
+
+            <label>
+
+                Short Description
+
+            </label>
+
+            {{ form.short_description }}
+
+            {{ form.short_description.errors }}
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Overview
+
+            </label>
+
+            {{ form.overview }}
+
+            {{ form.overview.errors }}
+
+        </div>
+
+    </div>
+
+    <!-- ==========================
+         PUBLISHING
+    =========================== -->
+
+    <div class="form-section">
+
+        <h2>
+
+            Publishing
+
+        </h2>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>
+
+                    Featured Project
+
+                </label>
+
+                {{ form.featured }}
+
+                {{ form.featured.errors }}
+
+            </div>
+
+            <div>
+
+                <label>
+
+                    Status
+
+                </label>
+
+                {{ form.status }}
+
+                {{ form.status.errors }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================
+         ACTION BUTTONS
+    =========================== -->
+
+    <div class="form-actions">
+
+        <button
+            type="submit"
+            class="primary-btn">
+
+            {% if form.instance.pk %}
+
+                Update Project
+
+            {% else %}
+
+                Create Project
+
+            {% endif %}
+
+        </button>
+
+        <a
+            href="{% url 'dashboard_projects' %}"
+            class="secondary-btn">
+
+            Cancel
+
+        </a>
+
+    </div>
+
+</form>
+
+{% endblock %}

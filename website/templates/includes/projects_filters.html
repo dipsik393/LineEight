@@ -5,33 +5,30 @@
         <div class="toolbar-wrapper">
 
             <!-- Filters -->
-
             <div class="filter-buttons">
 
-                <button class="filter-btn active" data-filter="all">
+                <button
+                    type="button"
+                    class="filter-btn active"
+                    data-filter="all">
                     All
                 </button>
 
-                <button class="filter-btn" data-filter="website">
-                    Websites
-                </button>
+                {% for service in services %}
 
-                <button class="filter-btn" data-filter="graphic">
-                    Graphic Design
-                </button>
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-filter="{{ service|lower }}">
+                        {{ service }}
+                    </button>
 
-                <button class="filter-btn" data-filter="photo">
-                    Photography
-                </button>
+                {% endfor %}
 
-                <button class="filter-btn" data-filter="video">
-                    Videography
-                </button>
 
             </div>
 
             <!-- Search -->
-
             <div class="search-box">
 
                 <i class="bi bi-search"></i>
@@ -39,7 +36,9 @@
                 <input
                     type="text"
                     id="searchProjects"
-                    placeholder="Search projects...">
+                    placeholder="Search projects..."
+                    autocomplete="off"
+                >
 
             </div>
 

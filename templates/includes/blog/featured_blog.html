@@ -1,0 +1,55 @@
+{% if featured_blog %}
+
+<section class="featured-blog">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                {% if featured_blog.featured_image %}
+
+                    <img src="{{ featured_blog.featured_image.url }}"
+                         alt="{{ featured_blog.title }}">
+
+                {% endif %}
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <span class="section-tag">
+
+                    Featured Article
+
+                </span>
+
+                <h2>
+
+                    {{ featured_blog.title }}
+
+                </h2>
+
+                <p>
+
+                    {{ featured_blog.excerpt }}
+
+                </p>
+
+                <a href="{{ featured_blog.get_absolute_url }}"
+                   class="blog-btn">
+
+                    Read Article
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}

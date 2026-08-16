@@ -1,0 +1,126 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}
+Reply to {{ inquiry.name }}
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/dashboard-inquiry.css' %}"
+>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <a
+            href="{% url 'dashboard_inquiry_detail' inquiry.id %}"
+            class="back-link"
+        >
+            <i class="bi bi-arrow-left"></i>
+            Back to Inquiry
+        </a>
+
+        <h1>
+            Reply to {{ inquiry.name }}
+        </h1>
+
+        <p>
+            Send a response to {{ inquiry.email }}.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-card inquiry-reply-card">
+
+    <div class="reply-recipient">
+
+        <div class="contact-avatar">
+
+            <i class="bi bi-person"></i>
+
+        </div>
+
+        <div>
+
+            <strong>
+                {{ inquiry.name }}
+            </strong>
+
+            <span>
+                {{ inquiry.email }}
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="original-message">
+
+        <small>
+            Original message
+        </small>
+
+        <p>
+            {{ inquiry.message|linebreaks }}
+        </p>
+
+    </div>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+
+            <label for="reply">
+                Reply
+            </label>
+
+            <textarea
+                id="reply"
+                name="reply"
+                rows="8"
+                placeholder="Write your response..."
+                required
+            ></textarea>
+
+        </div>
+
+
+        <div class="inquiry-actions">
+
+            <a
+                href="{% url 'dashboard_inquiry_detail' inquiry.id %}"
+                class="secondary-btn"
+            >
+                Cancel
+            </a>
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                <i class="bi bi-send"></i>
+                Send Reply
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -5,111 +5,78 @@
         <div class="process-heading">
 
             <span class="section-tag">
+
                 OUR PROCESS
+
             </span>
 
             <h2>
-                How We Built It
-            </h2>
 
-            <p>
-                Every project follows a structured process to ensure
-                quality, usability and long-term performance.
-            </p>
+                How We Built This Project
+
+            </h2>
 
         </div>
 
-        <div class="process-timeline">
+        <div class="process-grid">
 
-            <!-- Step 1 -->
+            {% for step in project.steps.all %}
 
-            <div class="process-step">
+            <div class="process-card">
 
-                <div class="process-circle">
-                    01
+                <div class="process-number">
+
+                    {{ step.number }}
+
                 </div>
 
                 <div class="process-icon">
-                    <i class="bi bi-search"></i>
+
+                    {% if step.icon == "search" %}
+                        <i class="bi bi-search"></i>
+
+                    {% elif step.icon == "palette" %}
+                        <i class="bi bi-palette"></i>
+
+                    {% elif step.icon == "code" %}
+                        <i class="bi bi-code-slash"></i>
+
+                    {% elif step.icon == "rocket" %}
+                        <i class="bi bi-rocket-takeoff"></i>
+
+                    {% else %}
+                        <i class="bi bi-circle"></i>
+                    {% endif %}
+
                 </div>
 
-                <h3>Discovery</h3>
+                <h3>
+
+                    {{ step.title }}
+
+                </h3>
 
                 <p>
-                    Understanding the client's goals,
-                    users and project requirements.
+
+                    {{ step.description }}
+
                 </p>
 
             </div>
 
-            <div class="timeline-line"></div>
+            {% empty %}
 
-            <!-- Step 2 -->
-
-            <div class="process-step">
-
-                <div class="process-circle">
-                    02
-                </div>
-
-                <div class="process-icon">
-                    <i class="bi bi-palette"></i>
-                </div>
-
-                <h3>Design</h3>
+            <div class="empty-process">
 
                 <p>
-                    Creating clean layouts,
-                    wireframes and visual identity.
+
+                    No process steps have been added yet.
+
                 </p>
 
             </div>
 
-            <div class="timeline-line"></div>
-
-            <!-- Step 3 -->
-
-            <div class="process-step">
-
-                <div class="process-circle">
-                    03
-                </div>
-
-                <div class="process-icon">
-                    <i class="bi bi-code-slash"></i>
-                </div>
-
-                <h3>Development</h3>
-
-                <p>
-                    Building a fast, responsive and
-                    scalable website.
-                </p>
-
-            </div>
-
-            <div class="timeline-line"></div>
-
-            <!-- Step 4 -->
-
-            <div class="process-step">
-
-                <div class="process-circle">
-                    04
-                </div>
-
-                <div class="process-icon">
-                    <i class="bi bi-rocket-takeoff"></i>
-                </div>
-
-                <h3>Launch</h3>
-
-                <p>
-                    Testing, optimization and
-                    deployment to production.
-                </p>
-
-            </div>
+            {% endfor %}
 
         </div>
 

@@ -1,0 +1,150 @@
+{% load static %}
+
+<aside class="client-sidebar">
+
+    <!-- Logo -->
+
+    <div class="sidebar-logo">
+
+        <a href="{% url 'client_dashboard' %}">
+
+            {% if site_settings.logo %}
+
+                <img
+                    src="{{ site_settings.logo.url }}"
+                    alt="{{ site_settings.company_name }}"
+                >
+
+            {% else %}
+
+                <span>
+                    {{ site_settings.company_name }}
+                </span>
+
+            {% endif %}
+
+        </a>
+
+    </div>
+
+
+    <!-- Navigation -->
+
+    <ul>
+
+        <!-- Dashboard -->
+
+        <li>
+
+            <a href="{% url 'client_dashboard' %}">
+
+                <i class="bi bi-speedometer2"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- Projects -->
+
+        <li>
+
+            <a href="{% url 'client_projects' %}">
+
+                <i class="bi bi-folder2-open"></i>
+
+                <span>
+                    Projects
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- Files -->
+
+        <li>
+
+            <a href="{% url 'client_files' %}">
+
+                <i class="bi bi-cloud-arrow-down"></i>
+
+                <span>
+                    Files
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <!-- Messages -->
+
+        <li>
+
+            <a href="{% url 'client_messages_list' %}">
+
+                <i class="bi bi-chat-dots"></i>
+
+                <span>
+                    Messages
+                </span>
+
+                {% if new_messages %}
+
+                    <span class="client-notification-badge">
+
+                        {{ new_messages }}
+
+                    </span>
+
+                {% endif %}
+
+            </a>
+
+        </li>
+
+        <li class="sidebar-item">
+            <a
+                href="{% url 'client_ai' %}"
+                class="sidebar-link"
+            >
+                <i class="bi bi-robot"></i>
+                <span>AI Assistant</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'client_change_password' %}">
+                <i class="bi bi-shield-lock"></i>
+                <span>
+                    Change Password
+                </span>
+            </a>
+        </li>
+
+
+        <!-- Logout -->
+
+        <li class="sidebar-logout">
+
+            <a href="{% url 'client_logout' %}">
+
+                <i class="bi bi-box-arrow-right"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</aside>

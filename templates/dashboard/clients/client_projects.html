@@ -1,0 +1,212 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+{{ client.company }} | Projects
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <span class="section-tag">
+            CLIENT
+        </span>
+
+        <h1>
+            {{ client.company }}
+        </h1>
+
+        <p>
+            Manage projects and client updates.
+        </p>
+
+    </div>
+
+
+    <a
+        href="{% url 'dashboard_clients' %}"
+        class="secondary-btn">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Back to Clients
+
+    </a>
+
+</div>
+
+
+<div class="dashboard-card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h2>
+                Client Projects
+            </h2>
+
+            <p>
+                Projects assigned to {{ client.company }}.
+            </p>
+
+        </div>
+
+        <span class="badge success">
+
+            {{ projects|length }} Projects
+
+        </span>
+
+    </div>
+
+
+    <div class="dashboard-table-wrapper">
+
+        <table class="dashboard-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Image</th>
+
+                    <th>Project</th>
+
+                    <th>Service</th>
+
+                    <th>Status</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for project in projects %}
+
+                <tr>
+
+                    <td>
+
+                        {% if project.hero_image %}
+
+                            <img
+                                src="{{ project.hero_image.url }}"
+                                width="70"
+                                height="50"
+                                style="object-fit:cover; border-radius:8px;">
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            {{ project.title }}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        {{ project.service }}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if project.status == "published" %}
+
+                            <span class="badge success">
+                                Published
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge warning">
+                                Draft
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td class="project-actions">
+
+                        <a
+                            href="{% url 'project_updates' project.id %}"
+                            class="primary-btn">
+
+                            <i class="bi bi-clock-history"></i>
+
+                            Updates
+
+                        </a>
+
+                        <a href="{% url 'project_files' project.id %}"
+                           class="secondary-btn"
+                        >
+                           <i class="bi bi-folder2-open"></i>
+                           Files
+                        </a>
+
+
+                        <a
+                            href="{% url 'dashboard_project_edit' project.id %}"
+                            class="secondary-btn">
+
+                            Edit
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5">
+
+                        <div class="empty-state">
+
+                            <i class="bi bi-folder-x"></i>
+
+                            <h3>
+                                No projects
+                            </h3>
+
+                            <p>
+                                This client does not have any projects assigned yet.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

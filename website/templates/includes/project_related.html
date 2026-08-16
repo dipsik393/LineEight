@@ -1,0 +1,83 @@
+<section class="related-projects">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                MORE PROJECTS
+
+            </span>
+
+            <h2>
+
+                Related Projects
+
+            </h2>
+
+        </div>
+
+        <div class="projects-grid">
+
+            {% for related in related_projects %}
+
+            <article class="project-card">
+
+                <div class="project-image">
+
+                    <img src="{{ related.hero_image.url }}"
+                         alt="{{ related.title }}">
+
+                    <div class="project-overlay">
+
+                        <a href="{% url 'project_detail' related.slug %}"
+                           class="project-link">
+
+                            View Project
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="project-body">
+
+                    <span class="project-type">
+
+                        {{ related.service }}
+
+                    </span>
+
+                    <h3>
+
+                        {{ related.title }}
+
+                    </h3>
+
+                    <p>
+
+                        {{ related.short_description }}
+
+                    </p>
+
+                </div>
+
+            </article>
+
+            {% empty %}
+
+            <p>
+
+                No related projects available.
+
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>

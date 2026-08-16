@@ -1,0 +1,289 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}
+Inquiry Details
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/dashboard-inquiry.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <a
+            href="{% url 'dashboard_messages' %}"
+            class="back-link"
+        >
+            <i class="bi bi-arrow-left"></i>
+            Back to Messages
+        </a>
+
+        <h1>
+            Inquiry Details
+        </h1>
+
+        <p>
+            Review the inquiry submitted through your website.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="inquiry-layout">
+
+
+    <!-- MAIN INQUIRY -->
+
+    <div class="dashboard-card inquiry-main">
+
+        <div class="inquiry-header">
+
+            <div>
+
+                <span class="section-tag">
+                    {{ inquiry.service }}
+                </span>
+
+                <h2>
+                    {{ inquiry.subject|default:"Website Inquiry" }}
+                </h2>
+
+            </div>
+
+
+            <div>
+
+                {% if inquiry.status == "new" %}
+
+                    <span class="badge danger">
+                        New
+                    </span>
+
+                {% elif inquiry.status == "read" %}
+
+                    <span class="badge warning">
+                        Read
+                    </span>
+
+                {% else %}
+
+                    <span class="badge success">
+                        Replied
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="inquiry-message">
+
+            <h3>
+                Message
+            </h3>
+
+            <p>
+                {{ inquiry.message|linebreaks }}
+            </p>
+
+        </div>
+
+
+        <div class="inquiry-meta">
+
+            <span>
+
+                <i class="bi bi-calendar3"></i>
+
+                {{ inquiry.created_at|date:"d M Y, H:i" }}
+
+            </span>
+
+            <span>
+
+                <i class="bi bi-clock"></i>
+
+                Updated
+                {{ inquiry.updated_at|date:"d M Y, H:i" }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- CLIENT INFORMATION -->
+
+    <div class="dashboard-card inquiry-sidebar">
+
+        <div class="card-heading">
+
+            <h3>
+                Contact Information
+            </h3>
+
+        </div>
+
+
+        <div class="contact-profile">
+
+            <div class="contact-avatar">
+
+                <i class="bi bi-person"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    {{ inquiry.name }}
+                </strong>
+
+                {% if inquiry.company %}
+
+                    <span>
+                        {{ inquiry.company }}
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-details">
+
+            <div>
+
+                <i class="bi bi-envelope"></i>
+
+                <div>
+
+                    <small>
+                        Email
+                    </small>
+
+                    <a href="mailto:{{ inquiry.email }}">
+                        {{ inquiry.email }}
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            {% if inquiry.phone %}
+
+            <div>
+
+                <i class="bi bi-telephone"></i>
+
+                <div>
+
+                    <small>
+                        Phone
+                    </small>
+
+                    <a href="tel:{{ inquiry.phone }}">
+                        {{ inquiry.phone }}
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <div>
+
+                <i class="bi bi-briefcase"></i>
+
+                <div>
+
+                    <small>
+                        Service
+                    </small>
+
+                    <span>
+                        {{ inquiry.service }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            {% if inquiry.budget %}
+
+            <div>
+
+                <i class="bi bi-cash-stack"></i>
+
+                <div>
+
+                    <small>
+                        Budget
+                    </small>
+
+                    <span>
+                        {{ inquiry.budget }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ACTIONS -->
+
+<div class="inquiry-actions">
+
+    <a
+        href="{% url 'dashboard_inquiry_reply' inquiry.id %}"
+        class="primary-btn">
+        <i class="bi bi-reply"></i>
+        Reply
+    </a>
+
+    <a
+        href="{% url 'dashboard_inquiry_delete' inquiry.id %}"
+        class="danger-btn"
+    >
+
+        <i class="bi bi-trash"></i>
+
+        Delete Inquiry
+
+    </a>
+
+</div>
+
+{% endblock %}

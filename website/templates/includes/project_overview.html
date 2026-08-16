@@ -5,10 +5,16 @@
         <div class="overview-heading">
 
             <span class="section-tag">
+
                 PROJECT OVERVIEW
+
             </span>
 
-            <h2>Key Project Information</h2>
+            <h2>
+
+                Key Project Information
+
+            </h2>
 
         </div>
 
@@ -19,14 +25,21 @@
             <div class="overview-card">
 
                 <div class="overview-icon">
+
                     <i class="bi bi-people"></i>
+
                 </div>
 
-                <span>CLIENT</span>
+                <span>
+
+                    CLIENT
+
+                </span>
 
                 <h4>
-                    Pan African Society of
-                    Endometriosis
+
+                    {{ project.client }}
+
                 </h4>
 
             </div>
@@ -36,13 +49,21 @@
             <div class="overview-card">
 
                 <div class="overview-icon">
+
                     <i class="bi bi-laptop"></i>
+
                 </div>
 
-                <span>SERVICE</span>
+                <span>
+
+                    SERVICE
+
+                </span>
 
                 <h4>
-                    Demystifying Endometriosis
+
+                    {{ project.service }}
+
                 </h4>
 
             </div>
@@ -52,32 +73,64 @@
             <div class="overview-card">
 
                 <div class="overview-icon">
+
                     <i class="bi bi-heart-pulse"></i>
+
                 </div>
 
-                <span>INDUSTRY</span>
+                <span>
+
+                    INDUSTRY
+
+                </span>
 
                 <h4>
-                    Healthcare,
-                    Non-Profit,
-                    Advocacy
+
+                    {{ project.industry }}
+
                 </h4>
 
             </div>
 
-            <!-- Year -->
+            <!-- Duration -->
 
             <div class="overview-card">
 
                 <div class="overview-icon">
+
                     <i class="bi bi-calendar3"></i>
+
                 </div>
 
-                <span>YEAR</span>
+                <span>
 
-                <h4>2025</h4>
+                    DURATION
+
+                </span>
+
+                <h4>
+
+                    {{ project.duration }}
+
+                </h4>
 
             </div>
+
+        </div>
+
+        <div class="overview-description">
+
+            <h3>
+
+                Project Overview
+
+            </h3>
+
+            <p>
+
+                {{ project.overview|linebreaks }}
+
+            </p>
 
         </div>
 

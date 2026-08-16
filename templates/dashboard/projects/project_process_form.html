@@ -1,0 +1,39 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+
+Edit Process Step
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            Edit Process Step
+
+        </h1>
+
+    </div>
+
+</div>
+
+<form method="POST" class="dashboard-form">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button class="primary-btn">
+
+        Save Changes
+
+    </button>
+
+</form>
+
+{% endblock %}

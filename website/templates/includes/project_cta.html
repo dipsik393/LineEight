@@ -7,18 +7,21 @@
             <div class="cta-content">
 
                 <span class="section-tag">
-                    LET'S BUILD SOMETHING AMAZING
+
+                    {{ project.cta_tag|default:"LET'S BUILD SOMETHING AMAZING" }}
+
                 </span>
 
                 <h2>
-                    Ready to start your
-                    <span>next project?</span>
+
+                    {{ project.cta_title|default:"Ready to start your next project?" }}
+
                 </h2>
 
                 <p>
-                    Whether you need a professional website, branding,
-                    photography, videography or a complete digital solution,
-                    Line Eight is ready to bring your ideas to life.
+
+                    {{ project.cta_text|default:"Whether you need a professional website, branding, photography, videography or a complete digital solution, Line Eight is ready to bring your ideas to life." }}
+
                 </p>
 
                 <div class="cta-buttons">

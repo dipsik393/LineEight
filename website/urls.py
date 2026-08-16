@@ -7,10 +7,9 @@ urlpatterns = [
     path("blog/", views.blog, name="blog"),
     path("contact/", views.contact, name="contact"),
     path("projects/", views.projects, name="projects"),
-    path("projects/pase/", views.project_detail, name="pase"),
-     path("astron/",views.astron,name="astron"),
-     path("hbp/", views.hbp, name="hbp"),
-    path("quest/", views.quest, name="quest"),
-    path("healing-mama-africa/", views.healing_mama_africa, name="healing_mama_africa"),
+    path("projects/<slug:slug>/", views.project_detail, name="project_detail"),
+    path("blog/<slug:slug>/", views.blog_detail, name="blog_detail"),
+    path("blog/", views.blog, name="blog"),
+
 
 ]

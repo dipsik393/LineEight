@@ -1,0 +1,193 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+
+{{ title }}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            {{ title }}
+
+        </h1>
+
+    </div>
+
+</div>
+
+<form method="POST"
+
+      enctype="multipart/form-data"
+
+      class="project-form">
+
+    {% csrf_token %}
+
+    <div class="form-section">
+
+        <h2>
+
+            User Account
+
+        </h2>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>
+
+                    First Name
+
+                </label>
+
+                {{ form.first_name }}
+
+            </div>
+
+            <div>
+
+                <label>
+
+                    Last Name
+
+                </label>
+
+                {{ form.last_name }}
+
+            </div>
+
+            <div>
+
+                <label>
+
+                    Username
+
+                </label>
+
+                {{ form.username }}
+
+            </div>
+
+            <div>
+
+                <label>
+
+                    Email
+
+                </label>
+
+                {{ form.email }}
+
+            </div>
+
+            <div>
+
+                <label>
+
+                    Password
+
+                </label>
+
+                {{ form.password }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-section">
+
+        <h2>
+
+            Client Details
+
+        </h2>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>
+
+                    Company
+
+                </label>
+
+                {{ form.company }}
+
+            </div>
+
+            <div>
+
+                <label>
+
+                    Phone
+
+                </label>
+
+                {{ form.phone }}
+
+            </div>
+
+            <div>
+
+                <label>
+
+                    Position
+
+                </label>
+
+                {{ form.position }}
+
+            </div>
+
+            <div>
+
+                <label>
+
+                    Status
+
+                </label>
+
+                {{ form.status }}
+
+            </div>
+
+        </div>
+
+        <label>
+
+            Avatar
+
+        </label>
+
+        {{ form.avatar }}
+
+        <label>
+
+            Notes
+
+        </label>
+
+        {{ form.notes }}
+
+    </div>
+
+    <button class="primary-btn">
+
+        Save Client
+
+    </button>
+
+</form>
+
+{% endblock %}

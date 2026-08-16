@@ -1,0 +1,204 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Blog Article
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            {% if form.instance.pk %}
+                Edit Blog Article
+            {% else %}
+                New Blog Article
+            {% endif %}
+        </h1>
+
+        <p>
+            Create and manage blog articles for Line Eight.
+        </p>
+
+    </div>
+
+</div>
+
+<form method="POST"
+      enctype="multipart/form-data"
+      class="project-form">
+
+    {% csrf_token %}
+
+    <!-- =========================
+         BASIC INFORMATION
+    ========================== -->
+
+    <div class="form-section">
+
+        <h2>Basic Information</h2>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>Title</label>
+
+                {{ form.title }}
+
+            </div>
+
+            <div>
+
+                <label>Slug</label>
+
+                {{ form.slug }}
+
+            </div>
+
+            <div>
+
+                <label>Author</label>
+
+                {{ form.author }}
+
+            </div>
+
+            <div>
+
+                <label>Category</label>
+
+                {{ form.category }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FEATURED IMAGE
+    ========================== -->
+
+    <div class="form-section">
+
+        <h2>Featured Image</h2>
+
+        <label>Upload Image</label>
+
+        {{ form.featured_image }}
+
+    </div>
+
+
+    <!-- =========================
+         ARTICLE CONTENT
+    ========================== -->
+
+    <div class="form-section">
+
+        <h2>Article Content</h2>
+
+        <label>Excerpt</label>
+
+        {{ form.excerpt }}
+
+        <label>Full Content</label>
+
+        {{ form.content }}
+
+    </div>
+
+
+    <!-- =========================
+         SEO
+    ========================== -->
+
+    <div class="form-section">
+
+        <h2>SEO Information</h2>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>Reading Time (Minutes)</label>
+
+                {{ form.reading_time }}
+
+            </div>
+
+            <div>
+
+                <label>Meta Description</label>
+
+                {{ form.meta_description }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         PUBLISHING
+    ========================== -->
+
+    <div class="form-section">
+
+        <h2>Publishing</h2>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>Status</label>
+
+                {{ form.status }}
+
+            </div>
+
+            <div>
+
+                <label>Featured Article</label>
+
+                {{ form.featured }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         BUTTONS
+    ========================== -->
+
+    <div class="form-actions">
+
+        <button type="submit" class="primary-btn">
+
+            {% if form.instance.pk %}
+                Update Article
+            {% else %}
+                Publish Article
+            {% endif %}
+
+        </button>
+
+        <a href="{% url 'dashboard_blogs' %}" class="secondary-btn">
+
+            Cancel
+
+        </a>
+
+    </div>
+
+</form>
+
+{% endblock %}

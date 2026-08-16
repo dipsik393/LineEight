@@ -10,30 +10,76 @@
 
             <div class="col-lg-4">
 
-                <a href="/" class="footer-logo">
+                <a href="{% url 'home' %}" class="footer-logo">
 
-                    <span class="logo-icon"></span>
+                    {% if site_settings.logo %}
 
-                    Line Eight
+                        <img src="{{ site_settings.logo.url }}"
+                             alt="{{ site_settings.company_name }}"
+                             class="footer-logo-image">
+
+                    {% else %}
+
+                        <span class="logo-icon"></span>
+
+                    {% endif %}
+
+                    {{ site_settings.company_name }}
 
                 </a>
 
                 <p class="footer-text">
 
-                    We create brands that connect, inspire and grow through design,
-                    photography, videography and modern web experiences.
+                    {% if site_settings.footer_text %}
+
+                         {{ site_settings.footer_text }}
+
+                    {% else %}
+
+                        Creative solutions through design, photography,
+                        videography and web development.
+
+                    {% endif %}
 
                 </p>
 
                 <div class="footer-social">
 
-                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    {% if site_settings.facebook %}
+                    <a href="{{ site_settings.facebook }}" target="_blank">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    {% endif %}
 
-                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    {% if site_settings.instagram %}
+                    <a href="{{ site_settings.instagram }}" target="_blank">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    {% endif %}
 
-                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                    {% if site_settings.linkedin %}
+                    <a href="{{ site_settings.linkedin }}" target="_blank">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    {% endif %}
 
-                    <a href="#"><i class="bi bi-youtube"></i></a>
+                    {% if site_settings.youtube %}
+                    <a href="{{ site_settings.youtube }}" target="_blank">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                    {% endif %}
+
+                    {% if site_settings.twitter %}
+                    <a href="{{ site_settings.twitter }}" target="_blank">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                    {% endif %}
+
+                    {% if site_settings.tiktok %}
+                    <a href="{{ site_settings.tiktok }}" target="_blank">
+                        <i class="bi bi-tiktok"></i>
+                    </a>
+                    {% endif %}
 
                 </div>
 
@@ -47,13 +93,29 @@
 
                 <ul>
 
-                    <li><a href="/">Home</a></li>
+                    <li>
+                        <a href="{% url 'home' %}">
+                            Home
+                        </a>
+                    </li>
 
-                    <li><a href="/services/">Services</a></li>
+                    <li>
+                        <a href="{% url 'services' %}">
+                            Services
+                        </a>
+                    </li>
 
-                    <li><a href="/blog/">Blog</a></li>
+                    <li>
+                        <a href="{% url 'blog' %}">
+                            Blog
+                        </a>
+                    </li>
 
-                    <li><a href="/contact/">Contact</a></li>
+                    <li>
+                        <a href="{% url 'contact' %}">
+                            Contact
+                        </a>
+                    </li>
 
                 </ul>
 
@@ -87,15 +149,53 @@
 
                 <ul>
 
-                    <li>Nairobi, Kenya</li>
+                    {% if site_settings.address %}
+                    <li>
 
-                    <li>www.lineeight.co.ke</li>
+                        {{ site_settings.address }}
 
-                    <li>+254 796 985 193</li>
+                    </li>
+                    {% endif %}
+
+                    {% if site_settings.email %}
+                    <li>
+
+                        <a href="mailto:{{ site_settings.email }}">
+
+                            {{ site_settings.email }}
+
+                        </a>
+
+                    </li>
+                    {% endif %}
+
+                    {% if site_settings.phone %}
+                    <li>
+
+                        <a href="tel:{{ site_settings.phone }}">
+
+                            {{ site_settings.phone }}
+
+                        </a>
+
+                    </li>
+                    {% endif %}
+
+                    {% if site_settings.whatsapp %}
+                    <li>
+
+                        <a href="https://wa.me/{{ site_settings.whatsapp|cut:'+' }}">
+
+                            WhatsApp
+
+                        </a>
+
+                    </li>
+                    {% endif %}
 
                 </ul>
 
-                <a href="/contact/" class="footer-btn">
+                <a href="{% url 'contact' %}" class="footer-btn">
 
                     Start Your Project
 
@@ -111,15 +211,31 @@
 
             <p>
 
-                © 2026 Line Eight. All Rights Reserved.
+                {% if site_settings.copyright_text %}
+
+                    {{ site_settings.copyright_text }}
+
+                {% else %}
+
+                  © {% now "Y" %} {{ site_settings.company_name }}. All Rights Reserved.
+                  
+                {% endif %}
 
             </p>
 
             <div>
 
-                <a href="#">Privacy Policy</a>
+                <a href="#">
 
-                <a href="#">Terms</a>
+                    Privacy Policy
+
+                </a>
+
+                <a href="#">
+
+                    Terms
+
+                </a>
 
             </div>
 

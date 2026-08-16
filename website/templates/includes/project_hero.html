@@ -5,7 +5,9 @@
     <div class="container">
 
         <a href="{% url 'projects' %}" class="back-link">
+
             ← Back to Portfolio
+
         </a>
 
         <div class="project-hero-content">
@@ -16,34 +18,35 @@
 
                 <span class="section-tag">
 
-                    Web Design & Development
+                    {{ project.service }}
 
                 </span>
 
                 <h1>
 
-                    Pan African Society of
-                    <span>Endometriosis</span>
+                    {{ project.title }}
 
                 </h1>
 
                 <p>
 
-                    A healthcare platform built to improve awareness,
-                    education and collaboration across Africa through
-                    a modern, responsive digital experience.
+                    {{ project.short_description }}
 
                 </p>
 
                 <div class="hero-buttons">
 
-                    <a href="https://pase.africa/"
+                    {% if project.website_url %}
+
+                    <a href="{{ project.website_url }}"
                        target="_blank"
                        class="btn-primary">
 
                         Visit Website
 
                     </a>
+
+                    {% endif %}
 
                     <a href="#gallery"
                        class="btn-secondary">
@@ -76,15 +79,27 @@
 
                         <div class="browser-address">
 
-                            https://pase.africa
+                            {% if project.website_url %}
+
+                                {{ project.website_url }}
+
+                            {% else %}
+
+                                Line Eight Project
+
+                            {% endif %}
 
                         </div>
 
                     </div>
 
+                    {% if project.hero_image %}
+
                     <img
-                        src="{% static 'images/projects/pase/npase.jpg' %}"
-                        alt="PASE Homepage">
+                        src="{{ project.hero_image.url }}"
+                        alt="{{ project.title }}">
+
+                    {% endif %}
 
                 </div>
 

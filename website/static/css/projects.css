@@ -497,6 +497,10 @@ CARD
 
 }
 
+.project-card.hide {
+    display: none;
+}
+
 /*==================================================
 IMAGE
 ==================================================*/
@@ -789,6 +793,34 @@ PROJECT OVERVIEW
     line-height:1.5;
 
     font-weight:600;
+
+}
+
+.overview-description{
+
+    margin-top:60px;
+
+    background:#09141D;
+
+    border:1px solid #123042;
+
+    border-radius:20px;
+
+    padding:40px;
+
+}
+
+.overview-description h3{
+
+    margin-bottom:20px;
+
+}
+
+.overview-description p{
+
+    color:#8FA5B8;
+
+    line-height:1.9;
 
 }
 

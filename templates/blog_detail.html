@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+
+{{ blog.title }} | Line Eight
+
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/blog-detail.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="blog-detail-hero">
+
+    <div class="container">
+
+        <a href="{% url 'blog' %}" class="back-link">
+
+            ← Back to Blog
+
+        </a>
+
+        <span class="blog-category">
+
+            {{ blog.category }}
+
+        </span>
+
+        <h1>
+
+            {{ blog.title }}
+
+        </h1>
+
+        <div class="blog-meta">
+
+            <span>
+
+                By {{ blog.author }}
+
+            </span>
+
+            <span>
+
+                {{ blog.created_at|date:"F d, Y" }}
+
+            </span>
+
+            <span>
+
+                {{ blog.reading_time }} min read
+
+            </span>
+
+        </div>
+
+        {% if blog.featured_image %}
+
+        <div class="featured-image">
+
+            <img src="{{ blog.featured_image.url }}"
+                 alt="{{ blog.title }}">
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<section class="blog-content-section">
+
+    <div class="container">
+
+        <div class="blog-content">
+
+            {{ blog.content|linebreaks }}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="share-section">
+
+    <div class="container">
+
+        <h3>
+
+            Share this article
+
+        </h3>
+
+        <div class="share-links">
+
+            <a href="#">
+
+                <i class="bi bi-facebook"></i>
+
+            </a>
+
+            <a href="#">
+
+                <i class="bi bi-linkedin"></i>
+
+            </a>
+
+            <a href="#">
+
+                <i class="bi bi-twitter-x"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% if recent_posts %}
+
+<section class="related-blog">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+
+                MORE ARTICLES
+
+            </span>
+
+            <h2>
+
+                Continue Reading
+
+            </h2>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for article in recent_posts %}
+
+            <div class="col-lg-4">
+
+                <div class="blog-card">
+
+                    {% if article.featured_image %}
+
+                    <img src="{{ article.featured_image.url }}"
+                         alt="{{ article.title }}">
+
+                    {% endif %}
+
+                    <div class="blog-content">
+
+                        <span>
+
+                            {{ article.category }}
+
+                        </span>
+
+                        <h3>
+
+                            {{ article.title }}
+
+                        </h3>
+
+                        <a href="{{ article.get_absolute_url }}">
+
+                            Read Article
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+{% include "includes/project_cta.html" %}
+
+{% endblock %}

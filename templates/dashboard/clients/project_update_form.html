@@ -1,0 +1,139 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Add Project Update
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="section-tag">
+                PROJECT UPDATE
+            </span>
+
+            <h1>
+                Add Update
+            </h1>
+
+            <p>
+                {{ project.title }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card form-card">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label for="title">
+                    Update Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="e.g. Design Approved"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="status">
+                    Status
+                </label>
+
+                <select
+                    id="status"
+                    name="status"
+                    required>
+
+                    <option value="">
+                        Select status
+                    </option>
+
+                    <option value="Planning">
+                        Planning
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Review">
+                        Review
+                    </option>
+
+                    <option value="Approved">
+                        Approved
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="6"
+                    placeholder="Describe what has happened..."
+                    required></textarea>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'project_updates' project.id %}"
+                    class="secondary-btn">
+
+                    Cancel
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Save Update
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+<section class="blog-categories">
+
+    <div class="container">
+
+        <div class="blog-heading">
+
+            <span class="section-tag">
+                CATEGORIES
+            </span>
+
+            <h2>
+                Explore Topics
+            </h2>
+
+            <p>
+                Browse our articles by category.
+            </p>
+
+        </div>
+
+        <!-- Category Filter -->
+
+        <div class="category-filter">
+
+            <a href="{% url 'blog' %}"
+               class="{% if not selected_category %}active{% endif %}">
+
+                All
+
+            </a>
+
+            {% for category in categories %}
+
+                <a href="{% url 'blog' %}?category={{ category.category }}"
+                   class="{% if selected_category == category.category %}active{% endif %}">
+
+                    {{ category.category }}
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Category Cards -->
+
+        <div class="row g-4 mt-4">
+
+            {% for category in categories %}
+
+            <div class="col-lg-3 col-md-6">
+
+                <a href="{% url 'blog' %}?category={{ category.category }}"
+                   class="category-card text-decoration-none">
+
+                    <h3>
+
+                        {{ category.category }}
+
+                    </h3>
+
+                    <p>
+
+                        {{ category.total }} Article{{ category.total|pluralize }}
+
+                    </p>
+
+                </a>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12 text-center">
+
+                <p>
+
+                    No categories available.
+
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
