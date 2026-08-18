@@ -27,3 +27,5 @@ staticfiles/
 
 # Windows
 Thumbs.db
+
+media/
