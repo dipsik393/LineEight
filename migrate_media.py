@@ -11,88 +11,113 @@ import django
 django.setup()
 
 from portfolio.models import Project, ProjectImage
-from clients.models import Client, ProjectFile
-from news.models import Blog
-from settings_app.models import SiteSettings
 
 
 BASE_DIR = Path(__file__).resolve().parent
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_DIR = BASE_DIR / "media"
 
 
-def upload_field(obj, field_name):
-    field = getattr(obj, field_name)
+def find_original_file(name):
+    if not name:
+        return None
+
+    name = Path(name).name
+
+    stem = Path(name).stem
+
+    parts = stem.split("_")
+
+    candidates = []
+
+    for i in range(len(parts), 0, -1):
+        candidates.append("_".join(parts[:i]))
+
+    for candidate in candidates:
+        matches = list(MEDIA_DIR.rglob(candidate + ".*"))
+
+        if matches:
+            return matches[0]
+
+    return None
+
+
+def migrate_image(instance, field_name, label):
+
+    field = getattr(instance, field_name)
 
     if not field:
-        return False
+        return
 
-    current_name = field.name
+    original_name = field.name
 
-    # Already migrated to Cloudinary
-    if current_name.startswith("http://") or current_name.startswith("https://"):
-        print(f"SKIP   {obj} -> already external")
-        return True
+    print("\n" + label)
+    print(f"Database BEFORE: {original_name}")
 
-    local_path = MEDIA_ROOT / current_name
+    local_file = find_original_file(original_name)
 
-    if not local_path.exists():
-        print(f"MISSING {obj} -> {current_name}")
-        return False
+    if not local_file:
+        print("❌ LOCAL FILE NOT FOUND")
+        return
 
-    print(f"UPLOAD {obj} -> {current_name}")
+    print(f"FOUND: {local_file}")
 
-    # Open local file and save it through the configured storage.
-    with open(local_path, "rb") as f:
-        field.save(
-            Path(current_name).name,
-            f,
-            save=False,
-        )
+    try:
 
-    obj.save(update_fields=[field_name])
+        with open(local_file, "rb") as f:
 
-    print(f"OK     {obj} -> {field.name}")
+            uploaded_name = field.storage.save(
+                original_name,
+                f
+            )
 
-    return True
+        print(f"✅ CLOUDINARY: {uploaded_name}")
+
+        # IMPORTANT:
+        # Update the database with the actual Cloudinary name
+        setattr(instance, field_name, uploaded_name)
+
+        instance.save(update_fields=[field_name])
+
+        print(f"✅ DATABASE UPDATED: {uploaded_name}")
+
+        # Verify
+        updated_field = getattr(instance, field_name)
+
+        print(f"URL: {updated_field.url}")
+
+    except Exception as e:
+
+        print(f"❌ ERROR: {e}")
 
 
-print("\n=== PROJECT HERO IMAGES ===")
+print("\n==============================")
+print("PROJECT HERO IMAGES")
+print("==============================")
+
 
 for project in Project.objects.all():
-    upload_field(project, "hero_image")
+
+    migrate_image(
+        project,
+        "hero_image",
+        project.title
+    )
 
 
-print("\n=== PROJECT GALLERY IMAGES ===")
+print("\n==============================")
+print("PROJECT GALLERY IMAGES")
+print("==============================")
+
 
 for image in ProjectImage.objects.all():
-    upload_field(image, "image")
+
+    migrate_image(
+        image,
+        "image",
+        f"{image.project.title} / {image.title}"
+    )
 
 
-print("\n=== CLIENT AVATARS ===")
-
-for client in Client.objects.all():
-    upload_field(client, "avatar")
-
-
-print("\n=== PROJECT FILES ===")
-
-for project_file in ProjectFile.objects.all():
-    upload_field(project_file, "file")
-
-
-print("\n=== BLOG IMAGES ===")
-
-for blog in Blog.objects.all():
-    upload_field(blog, "featured_image")
-
-
-print("\n=== SITE SETTINGS ===")
-
-for settings in SiteSettings.objects.all():
-    upload_field(settings, "logo")
-    upload_field(settings, "favicon")
-
-
-print("\n================================")
-print("MEDIA MIGRATION COMPLETE")
-print("================================")
+print("\n==============================")
+print("MIGRATION FINISHED")
+print("==============================")
