@@ -5,6 +5,9 @@ __pycache__/
 
 # Django
 db.sqlite3
+# Database backups
+db_backup.sqlite3
+data_backup.json
 
 # Virtual Environment
 venv/
