@@ -6,6 +6,7 @@ from news.forms import SubscriberForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 
+
 def home(request):
     featured_projects = Project.objects.filter(
 
@@ -226,3 +227,5 @@ def projects(request):
         }
 
     )
+
+

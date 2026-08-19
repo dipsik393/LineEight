@@ -20,6 +20,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import JsonResponse
+from portfolio.models import ProjectImage
+
+def cloudinary_debug(request):
+    img = ProjectImage.objects.first()
+
+    return JsonResponse({
+        "database_engine": settings.DATABASES["default"]["ENGINE"],
+        "database_name": str(settings.DATABASES["default"]["NAME"]),
+        "cloudinary_cloud": settings.CLOUDINARY_STORAGE.get("CLOUD_NAME"),
+        "image_name": img.image.name if img else None,
+        "image_url": img.image.url if img else None,
+    })
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -29,7 +42,7 @@ urlpatterns = [
     path("dashboard/settings/",include("settings_app.urls")),
     path("dashboard/clients/",include("clients.urls")),
     path("dashboard/ai/",include("ai_agent.urls")),
-    
+    path("cloudinary-debug/", cloudinary_debug),
 
 ]
 
@@ -38,3 +51,5 @@ if settings.DEBUG:
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
     )
+
+
