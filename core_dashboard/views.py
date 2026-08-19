@@ -7,6 +7,9 @@ from news.models import Subscriber
 from inquiries.models import Inquiry
 from django.db.models import Q
 
+import cloudinary.api
+from django.http import JsonResponse
+
 from portfolio.models import Project
 from news.models import Blog
 from inquiries.models import Inquiry
@@ -591,3 +594,30 @@ def message_delete(request, pk):
         }
 
     )
+
+
+
+def cloudinary_assets(request):
+
+    result = cloudinary.api.resources(
+        type="upload",
+        resource_type="image",
+        prefix="media/projects/gallery",
+        max_results=500
+    )
+
+    assets = []
+
+    for resource in result.get("resources", []):
+
+        assets.append({
+            "public_id": resource.get("public_id"),
+            "secure_url": resource.get("secure_url"),
+            "display_name": resource.get("display_name"),
+            "created_at": resource.get("created_at"),
+        })
+
+    return JsonResponse({
+        "count": len(assets),
+        "assets": assets
+    })

@@ -22,6 +22,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import JsonResponse
 from portfolio.models import ProjectImage
+from core_dashboard.views import cloudinary_assets
 
 def cloudinary_debug(request):
     img = ProjectImage.objects.first()
@@ -43,6 +44,7 @@ urlpatterns = [
     path("dashboard/clients/",include("clients.urls")),
     path("dashboard/ai/",include("ai_agent.urls")),
     path("cloudinary-debug/", cloudinary_debug),
+    path("cloudinary-assets/", cloudinary_assets),
 
 ]
 
