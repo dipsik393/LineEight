@@ -10,7 +10,7 @@ from django.db.models import Q
 import cloudinary.api
 from django.http import JsonResponse
 
-from portfolio.models import Project
+from portfolio.models import Project, ProjectImage
 from news.models import Blog
 from inquiries.models import Inquiry
 
@@ -620,4 +620,21 @@ def cloudinary_assets(request):
     return JsonResponse({
         "count": len(assets),
         "assets": assets
+    })
+
+
+def database_images(request):
+
+    images = []
+
+    for image in ProjectImage.objects.all():
+        images.append({
+            "id": image.id,
+            "project_id": image.project_id,
+            "image": image.image.name if image.image else None,
+        })
+
+    return JsonResponse({
+        "count": len(images),
+        "images": images,
     })

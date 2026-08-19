@@ -98,5 +98,7 @@ urlpatterns = [
      "messages/<int:pk>/delete/",
      views.message_delete,
      name="dashboard_message_delete",
+
    ),
+   path("database-images/",views.database_images),
 ]
