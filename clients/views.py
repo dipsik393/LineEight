@@ -231,19 +231,31 @@ def client_delete(request, pk):
         }
 
     )
-
 def client_login(request):
 
     if request.user.is_authenticated:
 
-        return redirect("client_dashboard")
+        if Client.objects.filter(
+            user=request.user
+        ).exists():
+
+            return redirect("client_dashboard")
+
+        logout(request)
 
     error = None
 
     if request.method == "POST":
 
-        username = request.POST.get("username", "").strip()
-        password = request.POST.get("password", "")
+        username = request.POST.get(
+            "username",
+            ""
+        ).strip()
+
+        password = request.POST.get(
+            "password",
+            ""
+        )
 
         user = authenticate(
             request,
@@ -253,21 +265,22 @@ def client_login(request):
 
         if user is not None:
 
-            if not Client.objects.filter(
-                user=user
-            ).exists():
+            if user.is_active:
 
-                error = "This account is not registered as a client."
+                if Client.objects.filter(
+                    user=user
+                ).exists():
 
-            else:
+                    login(
+                        request,
+                        user
+                    )
 
-                login(request, user)
+                    return redirect(
+                        "client_dashboard"
+                    )
 
-                return redirect("client_dashboard")
-
-        else:
-
-            error = "Invalid username or password."
+        error = "Invalid client username or password."
 
     return render(
         request,
@@ -979,13 +992,14 @@ def client_file_download(request, pk):
         filename=project_file.name
     )
 
-
 def staff_login(request):
 
     if request.user.is_authenticated:
 
         if request.user.is_staff:
             return redirect("dashboard")
+
+        logout(request)
 
     error = None
 
@@ -1000,11 +1014,13 @@ def staff_login(request):
             password=password
         )
 
-        if user is not None and user.is_staff:
+        if user is not None:
 
-            login(request, user)
+            if user.is_active and user.is_staff:
 
-            return redirect("dashboard")
+                login(request, user)
+
+                return redirect("dashboard")
 
         error = "Invalid staff username or password."
 
@@ -1015,5 +1031,4 @@ def staff_login(request):
             "error": error
         }
     )
-
 

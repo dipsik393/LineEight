@@ -17,9 +17,8 @@
 
             {% else %}
 
-                <span>
-                    {{ site_settings.company_name }}
-                </span>
+                <span class="logo-line">Line</span>
+                <span class="logo-eight">Eight</span>
 
             {% endif %}
 
@@ -36,7 +35,10 @@
 
         <li>
 
-            <a href="{% url 'client_dashboard' %}">
+            <a
+                href="{% url 'client_dashboard' %}"
+                class="{% if request.resolver_match.url_name == 'client_dashboard' %}active{% endif %}"
+            >
 
                 <i class="bi bi-speedometer2"></i>
 
@@ -53,7 +55,10 @@
 
         <li>
 
-            <a href="{% url 'client_projects' %}">
+            <a
+                href="{% url 'client_projects' %}"
+                class="{% if request.resolver_match.url_name == 'client_projects' %}active{% endif %}"
+            >
 
                 <i class="bi bi-folder2-open"></i>
 
@@ -70,7 +75,10 @@
 
         <li>
 
-            <a href="{% url 'client_files' %}">
+            <a
+                href="{% url 'client_files' %}"
+                class="{% if request.resolver_match.url_name == 'client_files' %}active{% endif %}"
+            >
 
                 <i class="bi bi-cloud-arrow-down"></i>
 
@@ -87,7 +95,10 @@
 
         <li>
 
-            <a href="{% url 'client_messages_list' %}">
+            <a
+                href="{% url 'client_messages_list' %}"
+                class="{% if request.resolver_match.url_name == 'client_messages_list' %}active{% endif %}"
+            >
 
                 <i class="bi bi-chat-dots"></i>
 
@@ -98,9 +109,7 @@
                 {% if new_messages %}
 
                     <span class="client-notification-badge">
-
                         {{ new_messages }}
-
                     </span>
 
                 {% endif %}
@@ -109,23 +118,44 @@
 
         </li>
 
+
+        <!-- AI Assistant -->
+
         <li class="sidebar-item">
+
             <a
                 href="{% url 'client_ai' %}"
-                class="sidebar-link"
+                class="sidebar-link {% if request.resolver_match.url_name == 'client_ai' %}active{% endif %}"
             >
+
                 <i class="bi bi-robot"></i>
-                <span>AI Assistant</span>
+
+                <span>
+                    AI Assistant
+                </span>
+
             </a>
+
         </li>
 
+
+        <!-- Change Password -->
+
         <li>
-            <a href="{% url 'client_change_password' %}">
+
+            <a
+                href="{% url 'client_change_password' %}"
+                class="{% if request.resolver_match.url_name == 'client_change_password' %}active{% endif %}"
+            >
+
                 <i class="bi bi-shield-lock"></i>
+
                 <span>
                     Change Password
                 </span>
+
             </a>
+
         </li>
 
 

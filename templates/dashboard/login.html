@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "login_base.html" %}
 
 {% block title %}
 Staff Login | Line Eight
@@ -6,69 +6,133 @@ Staff Login | Line Eight
 
 {% block content %}
 
-<div class="staff-login-page">
+<section class="auth-page">
 
-    <div class="staff-login-card">
+    <div class="auth-container">
 
-        <div class="staff-login-icon">
-            <i class="bi bi-shield-lock"></i>
+        <div class="auth-card staff-auth-card">
+
+            <a href="{% url 'home' %}" class="auth-logo">
+                <span>Line</span> Eight
+            </a>
+
+
+            <div class="auth-icon staff-icon">
+
+                <i class="bi bi-shield-lock"></i>
+
+            </div>
+
+
+            <div class="auth-header">
+
+                <h1>Staff Portal</h1>
+
+                <p>
+                    Sign in to access the Line Eight dashboard.
+                </p>
+
+            </div>
+
+
+            {% if error %}
+
+                <div class="auth-error">
+
+                    <i class="bi bi-exclamation-circle"></i>
+
+                    <span>
+                        {{ error }}
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST" class="auth-form">
+
+                {% csrf_token %}
+
+
+                <div class="auth-field">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-person"></i>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+
+                    Sign In
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <div class="auth-footer">
+
+                <a href="{% url 'home' %}">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Back to website
+
+                </a>
+
+            </div>
+
         </div>
-
-        <h1>Staff Login</h1>
-
-        <p>
-            Sign in to access the Line Eight dashboard.
-        </p>
-
-        {% if error %}
-            <div class="login-error">
-                {{ error }}
-            </div>
-        {% endif %}
-
-        <form method="POST">
-
-            {% csrf_token %}
-
-            <div class="form-group">
-                <label>Username</label>
-
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Enter your username"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    required
-                >
-            </div>
-
-            <button
-                type="submit"
-                class="login-btn"
-            >
-                <i class="bi bi-box-arrow-in-right"></i>
-                Sign In
-            </button>
-
-        </form>
-
-        <a href="{% url 'home' %}" class="back-home">
-            <i class="bi bi-arrow-left"></i>
-            Back to website
-        </a>
 
     </div>
 
-</div>
+</section>
 
 {% endblock %}

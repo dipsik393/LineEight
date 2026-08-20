@@ -26,11 +26,17 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep -the secret key used in production secret!
+# =========================================
+# SECURITY
+# =========================================
+
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "True").lower() == "true"
+DEBUG = os.getenv(
+    "DEBUG",
+    "True"
+).lower() == "true"
+
 
 ALLOWED_HOSTS = [
     host.strip()
@@ -41,6 +47,57 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv(
+        "CSRF_TRUSTED_ORIGINS",
+        ""
+    ).split(",")
+    if origin.strip()
+]
+
+
+# =========================================
+# SESSION SECURITY
+# =========================================
+
+SESSION_COOKIE_HTTPONLY = True
+
+SESSION_COOKIE_SAMESITE = "Lax"
+
+CSRF_COOKIE_SAMESITE = "Lax"
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# =========================================
+# PRODUCTION SECURITY
+# =========================================
+
+if not DEBUG:
+
+    SECURE_SSL_REDIRECT = True
+
+    SESSION_COOKIE_SECURE = True
+
+    CSRF_COOKIE_SECURE = True
+
+    SESSION_COOKIE_HTTPONLY = True
+
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+
+    SECURE_REFERRER_POLICY = "same-origin"
+
+    SECURE_HSTS_SECONDS = 31536000
+
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+    SECURE_HSTS_PRELOAD = True
+
+    X_FRAME_OPTIONS = "DENY"
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,6 +107,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "axes",
 
     "cloudinary",
     "cloudinary_storage",
@@ -63,6 +121,7 @@ INSTALLED_APPS = [
     'settings_app',
     'clients',
     'ai_agent',
+    
 ]
 
 MIDDLEWARE = [
@@ -74,6 +133,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
+
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -191,3 +252,29 @@ STORAGES = {
     },
 }
 
+
+AUTHENTICATION_BACKENDS = [
+    "axes.backends.AxesStandaloneBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+
+# =========================================
+# LOGIN SECURITY / AXES
+# =========================================
+
+AXES_ENABLED = True
+
+# Lock after 5 failed attempts
+AXES_FAILURE_LIMIT = 5
+
+# Cooldown period after lockout
+AXES_COOLOFF_TIME = 1
+
+# Track attempts by username + IP
+AXES_LOCKOUT_PARAMETERS = [
+    ["username", "ip_address"],
+]
+
+# Return HTTP 429 when locked out
+AXES_HTTP_RESPONSE_CODE = 429

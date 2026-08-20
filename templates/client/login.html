@@ -1,76 +1,130 @@
-{% extends "base.html" %}
+{% extends "login_base.html" %}
 
 {% block title %}
-
-Client Login
-
+Client Login | Line Eight
 {% endblock %}
 
 {% block content %}
 
-<section class="login-page">
+<section class="auth-page">
 
-<div class="container">
+    <div class="auth-container">
 
-<div class="login-card">
+        <div class="auth-card">
 
-<h2>
+            <a href="{% url 'home' %}" class="auth-logo">
+                <span>Line</span> Eight
+            </a>
 
-Client Portal
+            <div class="auth-icon">
+                <i class="bi bi-person-circle"></i>
+            </div>
 
-</h2>
+            <div class="auth-header">
 
-<p>
+                <h1>Welcome back</h1>
 
-Login to view your projects.
+                <p>
+                    Sign in to access your Line Eight client portal.
+                </p>
 
-</p>
+            </div>
 
-{% if error %}
+            {% if error %}
 
-<div class="alert alert-danger">
+                <div class="auth-error">
 
-{{ error }}
+                    <i class="bi bi-exclamation-circle"></i>
 
-</div>
+                    <span>
+                        {{ error }}
+                    </span>
 
-{% endif %}
+                </div>
 
-<form method="POST">
+            {% endif %}
 
-{% csrf_token %}
+            <form method="POST" class="auth-form">
 
-<input
+                {% csrf_token %}
 
-type="text"
+                <div class="auth-field">
 
-name="username"
+                    <label for="username">
+                        Username
+                    </label>
 
-placeholder="Username"
+                    <div class="input-wrapper">
 
-required>
+                        <i class="bi bi-person"></i>
 
-<input
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
 
-type="password"
+                    </div>
 
-name="password"
+                </div>
 
-placeholder="Password"
 
-required>
+                <div class="auth-field">
 
-<button class="primary-btn">
+                    <label for="password">
+                        Password
+                    </label>
 
-Login
+                    <div class="input-wrapper">
 
-</button>
+                        <i class="bi bi-lock"></i>
 
-</form>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
 
-</div>
+                    </div>
 
-</div>
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+
+                    Sign In
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <div class="auth-footer">
+
+                <a href="{% url 'home' %}">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Back to website
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 

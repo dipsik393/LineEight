@@ -17,7 +17,7 @@ class ClientForm(forms.ModelForm):
 
     password = forms.CharField(
 
-        required=False,
+        required=True,
 
         widget=forms.PasswordInput()
 

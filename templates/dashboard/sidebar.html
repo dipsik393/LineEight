@@ -2,141 +2,129 @@
 
 <aside class="sidebar">
 
+    <!-- LOGO -->
     <div class="logo">
-
         <h2>
             Line <span>Eight</span>
         </h2>
-
     </div>
 
 
-    <ul>
+    <ul class="sidebar-menu">
 
-        <!-- Dashboard -->
-
+        <!-- DASHBOARD -->
         <li>
-
-            <a href="{% url 'dashboard' %}">
+            <a href="{% url 'dashboard' %}"
+               class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
 
                 <i class="bi bi-grid"></i>
 
-                Dashboard
+                <span>Dashboard</span>
 
             </a>
-
         </li>
 
 
-        <!-- Projects -->
-
+        <!-- PROJECTS -->
         <li>
-
-            <a href="{% url 'dashboard_projects' %}">
+            <a href="{% url 'dashboard_projects' %}"
+               class="{% if request.resolver_match.url_name == 'dashboard_projects' %}active{% endif %}">
 
                 <i class="bi bi-folder"></i>
 
-                Projects
+                <span>Projects</span>
 
             </a>
-
         </li>
 
 
-        <!-- Blogs -->
-
+        <!-- BLOGS -->
         <li>
-
-            <a href="{% url 'dashboard_blogs' %}">
+            <a href="{% url 'dashboard_blogs' %}"
+               class="{% if request.resolver_match.url_name == 'dashboard_blogs' %}active{% endif %}">
 
                 <i class="bi bi-newspaper"></i>
 
-                Blogs
+                <span>Blogs</span>
 
             </a>
-
         </li>
 
 
-        <!-- Clients -->
-
+        <!-- CLIENTS -->
         <li>
-
-            <a href="{% url 'dashboard_clients' %}">
+            <a href="{% url 'dashboard_clients' %}"
+               class="{% if request.resolver_match.url_name == 'dashboard_clients' %}active{% endif %}">
 
                 <i class="bi bi-people"></i>
 
-                Clients
+                <span>Clients</span>
 
             </a>
-
         </li>
 
-        
 
-
-        <!-- Messages -->
-
+        <!-- MESSAGES -->
         <li>
-
-            <a href="{% url 'dashboard_messages' %}">
+            <a href="{% url 'dashboard_messages' %}"
+               class="{% if request.resolver_match.url_name == 'dashboard_messages' %}active{% endif %}">
 
                 <i class="bi bi-envelope"></i>
 
-                <span>
-                    Messages
-                </span>
+                <span>Messages</span>
 
-                {% if unread_messages > 0%}
+                {% if unread_messages > 0 %}
+                    <span class="sidebar-badge">
+                        {{ new_messages }}
+                    </span>
+                {% endif %}
 
-                       <span class="sidebar-badge">
-                            {{ new_messages }}
-                       </span>
-                {% endif %}           
             </a>
-
         </li>
 
+
+        <!-- CLIENT MESSAGES -->
         <li>
-            <a href="{% url 'client_messages_dashboard' %}">
+            <a href="{% url 'client_messages_dashboard' %}"
+               class="{% if request.resolver_match.url_name == 'client_messages_dashboard' %}active{% endif %}">
 
-                 <i class="bi bi-chat-square-text"></i>
+                <i class="bi bi-chat-square-text"></i>
 
-                <span>
-                  Client Messages
-                </span>
+                <span>Client Messages</span>
 
-                {% if client_unread_messages > 0%}
-
+                {% if client_unread_messages > 0 %}
                     <span class="sidebar-badge">
                         {{ client_unread_messages }}
                     </span>
-
                 {% endif %}
 
-             </a>
-        </li>
-
-        <li class="sidebar-item">
-            <a href="{% url 'ai_assistant' %}" class="sidebar-link">
-               <i class="bi bi-robot"></i>
-                <span>AI Assistant</span>
             </a>
         </li>
 
 
-        <!-- Settings -->
-
+        <!-- AI ASSISTANT -->
         <li>
+            <a href="{% url 'ai_assistant' %}"
+               class="{% if request.resolver_match.url_name == 'ai_assistant' %}active{% endif %}">
 
-            <a href="{% url 'dashboard_settings' %}">
+                <i class="bi bi-robot"></i>
+
+                <span>AI Assistant</span>
+
+            </a>
+        </li>
+
+
+        <!-- SETTINGS -->
+        <li>
+            <a href="{% url 'dashboard_settings' %}"
+               class="{% if request.resolver_match.url_name == 'dashboard_settings' %}active{% endif %}">
 
                 <i class="bi bi-gear"></i>
 
-                Settings
+                <span>Settings</span>
 
             </a>
-
         </li>
 
     </ul>
